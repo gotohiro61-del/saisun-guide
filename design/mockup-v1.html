@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>引っ越し採寸ガイド — イメージ図 v1</title>
+<style>
+  :root {
+    --navy: #1b3358;
+    --navy-deep: #142744;
+    --navy-soft: #eef2f8;
+    --ink: #2b3440;
+    --gray: #6b7684;
+    --line: #dde3ea;
+    --tape-yellow: #f5c518;
+    --paper: #ffffff;
+    --bg: #e9edf2;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    color: var(--ink);
+    line-height: 1.7;
+    padding: 32px 16px 64px;
+  }
+  .stage { max-width: 720px; margin: 0 auto; }
+
+  /* ===== モックアップ外側の説明 ===== */
+  .doc-head { text-align: center; margin-bottom: 28px; }
+  .doc-head .tag {
+    display: inline-block; background: var(--navy); color: #fff;
+    font-size: 12px; letter-spacing: .12em; padding: 4px 14px; border-radius: 999px;
+    margin-bottom: 10px;
+  }
+  .doc-head h1 { font-size: 20px; color: var(--navy-deep); }
+  .doc-head p { font-size: 13px; color: var(--gray); margin-top: 6px; }
+
+  /* ===== スマホフレーム ===== */
+  .phone {
+    width: 100%; max-width: 399px; margin: 0 auto;
+    background: #10141a;
+    border-radius: 44px;
+    padding: 12px;
+    box-shadow: 0 24px 60px rgba(16,25,40,.35);
+    position: relative;
+  }
+  .phone .screen {
+    background: var(--paper);
+    border-radius: 34px;
+    overflow: hidden;
+    position: relative;
+  }
+  .phone .notch {
+    position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+    width: 120px; height: 26px; background: #10141a; border-radius: 0 0 16px 16px;
+    z-index: 5;
+  }
+
+  /* ===== ページ本体(スマホ内) ===== */
+  .page { font-size: 15.5px; }
+
+  /* ヒーロー */
+  .hero {
+    background: var(--navy);
+    color: #fff;
+    padding: 52px 22px 26px;
+    position: relative;
+  }
+  .hero .brand {
+    font-size: 11px; letter-spacing: .1em; opacity: .75; margin-bottom: 14px;
+  }
+  .hero .welcome { font-size: 13.5px; opacity: .92; margin-bottom: 6px; }
+  .hero h2 {
+    font-size: 27px; line-height: 1.35; letter-spacing: .02em;
+  }
+  .hero h2 .rule {
+    display: inline-block; border-bottom: 4px solid var(--tape-yellow); padding-bottom: 2px;
+  }
+  .hero .lead {
+    font-size: 13.5px; margin-top: 12px; opacity: .92;
+  }
+  /* メジャーの目盛りモチーフ */
+  .tape-strip {
+    height: 14px; background: var(--tape-yellow); position: relative; overflow: hidden;
+  }
+  .tape-strip::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(90deg,
+      #10141a 0 2px, transparent 2px 10px);
+    background-position: 0 0; opacity: .85;
+    height: 6px;
+  }
+
+  /* 目次チェックリスト */
+  .menu { padding: 18px 16px 8px; background: var(--navy-soft); }
+  .menu .menu-title {
+    font-size: 12.5px; color: var(--navy); font-weight: 700; letter-spacing: .06em;
+    margin: 0 6px 10px;
+  }
+  .menu-card {
+    display: flex; align-items: center; gap: 12px;
+    background: #fff; border: 1px solid var(--line); border-radius: 14px;
+    padding: 13px 14px; margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(20,39,68,.06);
+  }
+  .menu-card .num {
+    flex: none; width: 40px; height: 40px; border-radius: 12px;
+    background: var(--navy); color: #fff; font-weight: 700; font-size: 17px;
+    display: grid; place-items: center;
+  }
+  .menu-card .label { flex: 1; }
+  .menu-card .label b { font-size: 15.5px; color: var(--navy-deep); }
+  .menu-card .label small { display: block; font-size: 11.5px; color: var(--gray); }
+  .menu-card .chev { color: var(--navy); font-size: 18px; opacity: .5; }
+
+  /* セクション共通 */
+  .sec { padding: 26px 20px 8px; }
+  .sec + .sec { border-top: 8px solid var(--navy-soft); }
+  .sec-head { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+  .sec-head .num {
+    flex: none; width: 34px; height: 34px; border-radius: 10px;
+    background: var(--navy); color: #fff; font-weight: 700; font-size: 15px;
+    display: grid; place-items: center;
+  }
+  .sec-head h3 { font-size: 19.5px; color: var(--navy-deep); }
+  .sec .catch { font-size: 12.5px; color: var(--gray); margin: 2px 0 12px 44px; }
+
+  .fig {
+    background: var(--navy-soft); border-radius: 14px; padding: 14px 10px 8px;
+    margin: 6px 0 14px; text-align: center;
+  }
+  .fig svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+  .fig figcaption { font-size: 11px; color: var(--gray); margin-top: 4px; }
+
+  .check-item {
+    display: flex; gap: 11px; padding: 11px 4px;
+    border-bottom: 1px dashed var(--line); align-items: flex-start;
+  }
+  .check-item:last-of-type { border-bottom: 0; }
+  .check-item input[type=checkbox] {
+    flex: none; width: 24px; height: 24px; margin-top: 2px;
+    accent-color: var(--navy);
+  }
+  .check-item .t b { font-size: 15.5px; }
+  .check-item .t small { display: block; font-size: 12.5px; color: var(--gray); line-height: 1.6; }
+  .approx { color: var(--navy); font-weight: 700; }
+
+  .voice {
+    background: #fdf6e3; border-left: 4px solid var(--tape-yellow);
+    border-radius: 0 10px 10px 0; padding: 10px 13px; margin: 12px 0 4px;
+    font-size: 12.5px; color: #6b5b1e;
+  }
+  .voice b { display: block; font-size: 11px; letter-spacing: .08em; margin-bottom: 2px; }
+
+  .photo-tip {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12.5px; color: var(--navy); font-weight: 700;
+    padding: 8px 2px 14px;
+  }
+  .photo-tip .ico {
+    flex: none; width: 26px; height: 26px; border-radius: 8px;
+    background: var(--navy); color: #fff; display: grid; place-items: center; font-size: 13px;
+  }
+
+  /* コツ・メモ・免責 */
+  .tips { background: var(--navy-soft); padding: 24px 20px; }
+  .tips h3 { font-size: 16px; color: var(--navy-deep); margin-bottom: 10px; }
+  .tips ul { list-style: none; }
+  .tips li {
+    font-size: 13.5px; padding-left: 22px; position: relative; margin-bottom: 8px;
+  }
+  .tips li::before {
+    content: "✓"; position: absolute; left: 0; top: 0;
+    color: var(--navy); font-weight: 700;
+  }
+  .memo {
+    background: #fff; border: 1px solid var(--line); border-radius: 14px;
+    padding: 14px; margin-top: 16px;
+  }
+  .memo h4 { font-size: 13.5px; color: var(--navy-deep); margin-bottom: 8px; }
+  .memo pre {
+    font-family: inherit; font-size: 12.5px; color: var(--gray);
+    background: var(--navy-soft); border-radius: 10px; padding: 10px 12px;
+    white-space: pre-wrap; line-height: 1.9;
+  }
+  .memo .copy-btn {
+    display: block; width: 100%; margin-top: 10px;
+    background: var(--navy); color: #fff; border: 0; border-radius: 12px;
+    font-size: 14.5px; font-weight: 700; padding: 13px; font-family: inherit;
+  }
+
+  .disclaim {
+    padding: 22px 22px 6px; font-size: 12.5px; color: var(--gray); line-height: 1.9;
+  }
+  .disclaim b { color: var(--ink); }
+
+  /* 会社署名 */
+  .signature {
+    background: var(--navy); color: #fff; padding: 26px 22px 20px; margin-top: 18px;
+  }
+  .signature .sig-label {
+    font-size: 11px; letter-spacing: .14em; opacity: .7; margin-bottom: 10px;
+  }
+  .signature p { font-size: 13.5px; opacity: .95; margin-bottom: 10px; }
+  .signature .co {
+    font-size: 15px; font-weight: 700; margin: 14px 0 2px;
+  }
+  .signature .placeholder {
+    display: inline-block; background: rgba(245,197,24,.18); color: var(--tape-yellow);
+    border: 1px dashed rgba(245,197,24,.6); border-radius: 6px;
+    font-size: 11px; padding: 2px 8px; margin-left: 8px; vertical-align: middle;
+  }
+  .signature .btob {
+    border-top: 1px solid rgba(255,255,255,.18); margin-top: 16px; padding-top: 12px;
+    font-size: 11.5px; opacity: .75;
+  }
+
+  /* 追従ボタン */
+  .float-btn {
+    position: sticky; bottom: 18px; z-index: 4;
+    width: fit-content; margin: -52px 14px 14px auto;
+    background: #fff; color: var(--navy); border: 1.5px solid var(--navy);
+    border-radius: 999px; font-size: 12.5px; font-weight: 700;
+    padding: 10px 16px; box-shadow: 0 4px 14px rgba(20,39,68,.22);
+  }
+
+  /* ===== 設計メモ ===== */
+  .notes { max-width: 640px; margin: 44px auto 0; }
+  .notes h2 {
+    font-size: 17px; color: var(--navy-deep); text-align: center; margin-bottom: 18px;
+  }
+  .note-card {
+    background: #fff; border: 1px solid var(--line); border-radius: 14px;
+    padding: 16px 18px; margin-bottom: 12px;
+  }
+  .note-card h3 {
+    font-size: 13.5px; color: var(--navy); margin-bottom: 6px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .note-card h3 .chip {
+    flex: none; font-size: 10.5px; background: var(--navy-soft); color: var(--navy);
+    border-radius: 999px; padding: 2px 10px; letter-spacing: .04em;
+  }
+  .note-card ul { list-style: none; }
+  .note-card li {
+    font-size: 12.5px; color: var(--ink); padding-left: 16px; position: relative; margin-bottom: 5px;
+  }
+  .note-card li::before {
+    content: "・"; position: absolute; left: 0; color: var(--navy);
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <div class="doc-head">
+    <span class="tag">イメージ図 v1(実装前の構成案)</span>
+    <h1>QRコード遷移先「引っ越し採寸ガイド」</h1>
+    <p>スマホ実寸イメージ — ページ全体を1本に展開して表示しています</p>
+  </div>
+
+  <!-- ============ スマホフレーム ============ -->
+  <div class="phone">
+    <div class="screen">
+      <div class="notch"></div>
+      <div class="page">
+
+        <!-- ヒーロー -->
+        <header class="hero">
+          <div class="brand">HIKKOSHI SAISUN GUIDE</div>
+          <div class="welcome">ご入居おめでとうございます。</div>
+          <h2>この<span class="rule">メジャー</span>で、<br>お部屋の採寸を。</h2>
+          <p class="lead">お引っ越しの前に測っておくと安心な<b>4つの場所</b>をまとめました。メジャーはご自由にお使いください。</p>
+        </header>
+        <div class="tape-strip"></div>
+
+        <!-- 目次チェックリスト -->
+        <nav class="menu">
+          <div class="menu-title">▼ 測っておきたい4つの場所(タップで移動)</div>
+          <div class="menu-card">
+            <div class="num">1</div>
+            <div class="label"><b>洗濯機パン</b><small>内寸と、蛇口の高さ</small></div>
+            <div class="chev">›</div>
+          </div>
+          <div class="menu-card">
+            <div class="num">2</div>
+            <div class="label"><b>冷蔵庫スペース</b><small>幅・高さと、ドアの開く向き</small></div>
+            <div class="chev">›</div>
+          </div>
+          <div class="menu-card">
+            <div class="num">3</div>
+            <div class="label"><b>カーテン</b><small>測るのは窓ではなく「レール」</small></div>
+            <div class="chev">›</div>
+          </div>
+          <div class="menu-card">
+            <div class="num">4</div>
+            <div class="label"><b>搬入経路</b><small>玄関・廊下・エレベーター</small></div>
+            <div class="chev">›</div>
+          </div>
+        </nav>
+
+        <!-- 1 洗濯機パン -->
+        <section class="sec">
+          <div class="sec-head"><div class="num">1</div><h3>洗濯機パン</h3></div>
+          <p class="catch">「置けなかった」がいちばん起きやすい場所です。</p>
+          <figure class="fig">
+            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+              <!-- 壁と床 -->
+              <line x1="30" y1="10" x2="30" y2="130" stroke="#8fa3bd" stroke-width="2"/>
+              <line x1="10" y1="130" x2="290" y2="130" stroke="#8fa3bd" stroke-width="2"/>
+              <!-- 蛇口 -->
+              <rect x="30" y="30" width="26" height="8" rx="3" fill="#1b3358"/>
+              <rect x="48" y="38" width="8" height="12" rx="2" fill="#1b3358"/>
+              <!-- 蛇口の高さ矢印 -->
+              <line x1="74" y1="50" x2="74" y2="128" stroke="#f0a000" stroke-width="2"/>
+              <path d="M74 50 l-4 8 h8 z" fill="#f0a000"/>
+              <path d="M74 128 l-4 -8 h8 z" fill="#f0a000"/>
+              <text x="82" y="92" font-size="12" fill="#6b5b1e">② 蛇口の高さ</text>
+              <!-- パン -->
+              <path d="M110 112 h150 v18 h-150 z" fill="#eef2f8" stroke="#1b3358" stroke-width="2.5"/>
+              <path d="M118 112 v-10 h134 v10" fill="none" stroke="#1b3358" stroke-width="2.5"/>
+              <!-- 内寸矢印 -->
+              <line x1="124" y1="120" x2="246" y2="120" stroke="#f0a000" stroke-width="2"/>
+              <path d="M124 120 l8 -4 v8 z" fill="#f0a000"/>
+              <path d="M246 120 l-8 -4 v8 z" fill="#f0a000"/>
+              <text x="152" y="146" font-size="12" fill="#6b5b1e">① 内側から内側</text>
+            </svg>
+            <figcaption>フチの「内側から内側」を測るのがポイント</figcaption>
+          </figure>
+          <div class="check-item">
+            <input type="checkbox">
+            <div class="t"><b>① パンの内寸(幅・奥行き)</b>
+              <small>立ち上がったフチの「内側から内側」を測ります。洗濯機の脚がここに収まります。</small></div>
+          </div>
+          <div class="check-item">
+            <input type="checkbox">
+            <div class="t"><b>② 蛇口の高さ</b>
+              <small>床から蛇口の下端まで。ドラム式は本体が高く(<span class="approx">約105〜110cm</span>)、ここが低いと設置できないことがあります。</small></div>
+          </div>
+          <div class="check-item">
+            <input type="checkbox">
+            <div class="t"><b>③ 洗面所の入口ドアの幅</b>
+              <small>パンに載っても、部屋に入らなければ設置できません。</small></div>
+          </div>
+          <div class="voice"><b>よくある失敗</b>ドラム式を買ったら蛇口が低くて設置できず、その場で持ち帰りに…。</div>
+          <div class="photo-tip"><span class="ico">📷</span>蛇口と排水口は、写真を撮っておけばOK。お店で見せると機種選びがスムーズです。</div>
+        </section>
+
+        <!-- 2 冷蔵庫 -->
+        <section class="sec">
+          <div class="sec-head"><div class="num">2</div><h3>冷蔵庫スペース</h3></div>
+          <p class="catch">幅だけでなく「ドアが開き切るか」まで。</p>
+          <figure class="fig">
+            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+              <!-- 吊り戸棚 -->
+              <rect x="70" y="8" width="160" height="20" fill="#8fa3bd"/>
+              <text x="108" y="22" font-size="11" fill="#fff">吊り戸棚・梁</text>
+              <!-- 冷蔵庫 -->
+              <rect x="105" y="52" width="90" height="86" rx="6" fill="#eef2f8" stroke="#1b3358" stroke-width="2.5"/>
+              <line x1="105" y1="88" x2="195" y2="88" stroke="#1b3358" stroke-width="2"/>
+              <circle cx="186" cy="72" r="2.5" fill="#1b3358"/>
+              <circle cx="186" cy="104" r="2.5" fill="#1b3358"/>
+              <!-- 放熱すき間 -->
+              <text x="200" y="46" font-size="11" fill="#6b5b1e">上 約5cm</text>
+              <line x1="150" y1="28" x2="150" y2="52" stroke="#f0a000" stroke-width="2"/>
+              <path d="M150 28 l-4 7 h8 z" fill="#f0a000"/>
+              <path d="M150 52 l-4 -7 h8 z" fill="#f0a000"/>
+              <!-- 幅矢印 -->
+              <line x1="70" y1="144" x2="230" y2="144" stroke="#f0a000" stroke-width="2"/>
+              <path d="M70 144 l8 -4 v8 z" fill="#f0a000"/>
+              <path d="M230 144 l-8 -4 v8 z" fill="#f0a000"/>
+              <text x="112" y="141" font-size="12" fill="#6b5b1e">① いちばん狭い幅</text>
+              <!-- 壁 -->
+              <rect x="60" y="28" width="10" height="110" fill="#8fa3bd"/>
+              <rect x="230" y="28" width="10" height="110" fill="#8fa3bd"/>
+            </svg>
+            <figcaption>放熱のすき間:上に約5cm・左右に約1cmずつ(機種により異なります)</figcaption>
+          </figure>
+          <div class="check-item">
+            <input type="checkbox">
+            <div class="t"><b>① 置き場所の幅</b>
+              <small>左右の壁・家具の間の、いちばん狭いところを測ります。</small></div>
+          </div>
+          <div class="check-item">
+            <input type="checkbox">
+            <div class="t"><b>② 高さ</b>
+              <small>床から吊り戸棚・梁まで。設置時は持ち上げて入れるので、数cmの余裕があると安心です。</small></div>
+          </div>
+          <div class="check-item">
+            <input type="checkbox">
+            <div class="t"><b>③ 壁が近いのはどちら側か</b>
+              <small>ドアは壁と反対側に開く機種を。壁ぴったりだと、引き出しが最後まで開かないことがあります。</small></div>
+          </div>
+          <div class="voice"><b>よくある失敗</b>幅はぴったりだったのに、壁にドアが当たって野菜室が開かなかった…。</div>
+          <div class="photo-tip"><span class="ico">📷</span>コンセントの位置は写真でOK。高い位置か、真後ろの低い位置かが分かれば十分です。</div>
+        </section>
+
+        <!-- 3 カーテン -->
+        <section class="sec">
+          <div class="sec-head"><div class="num">3</div><h3>カーテン</h3></div>
+          <p class="catch">測るのは窓ではなく、レールの小さな輪「ランナー」です。</p>
+          <figure class="fig">
+            <svg viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+              <!-- レール -->
+              <rect x="30" y="18" width="240" height="8" rx="3" fill="#1b3358"/>
+              <!-- ランナー -->
+              <g fill="none" stroke="#1b3358" stroke-width="2">
+                <circle cx="42" cy="33" r="5"/>
+                <circle cx="80" cy="33" r="4" opacity=".35"/>
+                <circle cx="118" cy="33" r="4" opacity=".35"/>
+                <circle cx="156" cy="33" r="4" opacity=".35"/>
+                <circle cx="194" cy="33" r="4" opacity=".35"/>
+                <circle cx="232" cy="33" r="4" opacity=".35"/>
+                <circle cx="258" cy="33" r="5"/>
+              </g>
+              <text x="20" y="55" font-size="11" fill="#1b3358">固定ランナー</text>
+              <text x="222" y="55" font-size="11" fill="#1b3358">固定ランナー</text>
+              <!-- 幅矢印 -->
+              <line x1="42" y1="66" x2="258" y2="66" stroke="#f0a000" stroke-width="2"/>
+              <path d="M42 66 l8 -4 v8 z" fill="#f0a000"/>
+              <path d="M258 66 l-8 -4 v8 z" fill="#f0a000"/>
+              <text x="106" y="82" font-size="12" fill="#6b5b1e">① 幅:輪から輪まで</text>
+              <!-- 丈矢印 -->
+              <line x1="42" y1="40" x2="42" y2="150" stroke="#f0a000" stroke-width="2" stroke-dasharray="4 3"/>
+              <path d="M42 150 l-4 -8 h8 z" fill="#f0a000"/>
+              <text x="52" y="128" font-size="12" fill="#6b5b1e">② 丈:輪の下から</text>
+              <!-- 床 -->
+              <line x1="20" y1="152" x2="280" y2="152" stroke="#8fa3bd" stroke-width="2"/>
+              <text x="238" y="166" font-size="11" fill="#8fa3bd">床</text>
+            </svg>
+            <figcaption>起点はいつも「ランナーの小さな輪」。窓そのものは測らなくてOK</figcaption>
+          </figure>
+          <div class="check-item">
+            <input type="checkbox">
+            <div class="t"><b>① 幅 — 両端の固定ランナーの間</b>
+              <small>レール両端にある「動かない輪」の中心から中心まで。</small></div>
+          </div>
+          <div class="check-item">
+            <input type="checkbox">
+            <div class="t"><b>② 丈(床までの大きな窓)</b>
+              <small>ランナーの輪の下から床まで測って、<span class="approx">約1cm</span>引きます(床を引きずらせないため)。</small></div>
+          </div>
+          <div class="check-item">
+            <input type="checkbox">
+            <div class="t"><b>③ 丈(腰の高さの窓)</b>
+              <small>ランナーの輪の下から窓枠の下まで測って、<span class="approx">約15cm</span>足します(光漏れ防止)。</small></div>
+          </div>
+          <div class="voice"><b>よくある失敗</b>窓枠のサイズで買ったら、丈が20cm足りなくてスースーだった…。</div>
+          <div class="photo-tip"><span class="ico">📷</span>レール全体も1枚パチリ。フック選びはお店で写真を見せれば相談できます。</div>
+        </section>
+
+        <!-- 4 搬入経路 -->
+        <section class="sec">
+          <div class="sec-head"><div class="num">4</div><h3>搬入経路</h3></div>
+          <p class="catch">大きな家具・家電は「通れるか」がすべてです。</p>
+          <figure class="fig">
+            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+              <!-- 玄関ドア(上から見た図) -->
+              <rect x="30" y="20" width="110" height="110" fill="none" stroke="#8fa3bd" stroke-width="2"/>
+              <line x1="60" y1="130" x2="110" y2="130" stroke="#fff" stroke-width="4"/>
+              <line x1="60" y1="130" x2="94" y2="96" stroke="#1b3358" stroke-width="3"/>
+              <path d="M60 130 A48 48 0 0 1 108 128" fill="none" stroke="#1b3358" stroke-width="1.5" stroke-dasharray="3 3"/>
+              <line x1="62" y1="138" x2="108" y2="138" stroke="#f0a000" stroke-width="2"/>
+              <path d="M62 138 l8 -4 v8 z" fill="#f0a000"/>
+              <path d="M108 138 l-8 -4 v8 z" fill="#f0a000"/>
+              <text x="34" y="14" font-size="11" fill="#1b3358">① 玄関ドア(全開で)</text>
+              <!-- 廊下の曲がり角 -->
+              <path d="M180 130 v-70 h90" fill="none" stroke="#8fa3bd" stroke-width="2"/>
+              <path d="M216 130 v-34 h54" fill="none" stroke="#8fa3bd" stroke-width="2"/>
+              <line x1="184" y1="112" x2="212" y2="112" stroke="#f0a000" stroke-width="2"/>
+              <path d="M184 112 l7 -4 v8 z" fill="#f0a000"/>
+              <path d="M212 112 l-7 -4 v8 z" fill="#f0a000"/>
+              <text x="178" y="52" font-size="11" fill="#1b3358">② 廊下・曲がり角</text>
+              <text x="178" y="146" font-size="11" fill="#6b5b1e">いちばん狭い所</text>
+            </svg>
+            <figcaption>ドアノブの出っ張り分は通れません。「有効幅」で測ります</figcaption>
+          </figure>
+          <div class="check-item">
+            <input type="checkbox">
+            <div class="t"><b>① 玄関ドアの有効幅</b>
+              <small>ドアを全開にして、ドア本体の内側から枠まで。ノブの出っ張り分は使えません。</small></div>
+          </div>
+          <div class="check-item">
+            <input type="checkbox">
+            <div class="t"><b>② 家の中でいちばん狭いところ</b>
+              <small>廊下の幅、曲がり角、各部屋の入口。特に洗面所とキッチンの入口は要チェックです。</small></div>
+          </div>
+          <div class="check-item">
+            <input type="checkbox">
+            <div class="t"><b>③ エレベーター(または階段)</b>
+              <small>入口の幅・高さと、中の奥行き。階段は手すりの内側の幅と踊り場の広さを。</small></div>
+          </div>
+          <div class="voice"><b>よくある失敗</b>ソファが玄関を通らず、ベランダから吊り上げて追加数万円…。</div>
+          <div class="photo-tip"><span class="ico">📷</span>通れるかの最終判断はプロにおまかせを。数字と写真を購入店・引越し業者に伝えれば、当日の「入らない」はほぼ防げます。</div>
+        </section>
+
+        <!-- 共通のコツ+メモ -->
+        <section class="tips">
+          <h3>採寸のコツ</h3>
+          <ul>
+            <li>測ったら、<b>メジャーを当てたまま写真</b>を1枚。数値と場所が同時に残ります。</li>
+            <li>数字は「約◯cm」で十分。通れるか見る寸法は小さめに、すき間は大きめに見積もると安全です。</li>
+            <li>メジャーのロックボタンを使うと、片手でも測りやすくなります。</li>
+          </ul>
+          <div class="memo">
+            <h4>採寸メモ(コピーしてスマホのメモへ)</h4>
+            <pre>□ 洗濯機パン 内寸 幅__×奥行__cm/蛇口の高さ__cm
+□ 冷蔵庫 幅__cm/高さ__cm/壁は 左・右
+□ カーテン 幅__cm/丈__cm(窓:大・腰)
+□ 搬入 玄関__cm/最も狭い所__cm/EV__cm</pre>
+            <button class="copy-btn">メモをコピーする</button>
+          </div>
+        </section>
+
+        <!-- 免責 -->
+        <section class="disclaim">
+          <p><b>寸法について</b> — お部屋の寸法は、同じ間取りでも一戸ごとに少しずつ異なります。このページの数値は「約◯cm」の目安としてご覧ください。せっかくメジャーがお手元にあるので、家具・家電のご購入前には、実際の場所を測ってからお決めいただくと安心です。</p>
+        </section>
+
+        <!-- 会社署名 -->
+        <footer class="signature">
+          <div class="sig-label">ABOUT</div>
+          <p>このお部屋は、〔会社名〕が原状回復工事を担当しました。次に入られる方が気持ちよく暮らし始められるように、という思いで、このメジャーを置いています。</p>
+          <p>お部屋のことで気になる点があれば、管理会社さままでお知らせください。</p>
+          <div class="co">〔会社名・ロゴ〕<span class="placeholder">※実名・連絡先は後藤さん確認後に差し替え</span></div>
+          <div class="btob">この採寸ガイドの設置にご興味のあるオーナー様・管理会社様は、〔問い合わせ先〕までご相談ください。</div>
+        </footer>
+
+        <!-- 追従ボタン(スクロール中も画面下に固定される想定) -->
+        <button class="float-btn">▲ 目次へもどる</button>
+
+      </div><!-- /page -->
+    </div>
+  </div>
+
+  <!-- ============ 設計メモ ============ -->
+  <div class="notes">
+    <h2>設計メモ — 3名の専門家検討の反映点</h2>
+
+    <div class="note-card">
+      <h3><span class="chip">モバイルUX</span>現地で立ったまま使える構成</h3>
+      <ul>
+        <li>ファーストビュー=「タイトル+4箇所の目次カード」。QRを読んで3秒で用途がわかる</li>
+        <li>アコーディオンで畳まない(片手はメジャーで塞がっている)。全展開+目次からのアンカー移動</li>
+        <li>記録手段は「メジャーを当てたまま写真」を公式に。入力ゼロで立ったまま完結</li>
+        <li>補助としてコピー用メモテンプレート(クリップボードにコピー→スマホのメモへ)</li>
+        <li>右下に追従「目次へもどる」ボタン。本文16px・行間1.7・1カラム・インラインSVGで軽量に</li>
+      </ul>
+    </div>
+
+    <div class="note-card">
+      <h3><span class="chip">採寸実務</span>1箇所=測る3項目+写真1枚に厳選</h3>
+      <ul>
+        <li>洗濯機パン:内寸/蛇口の高さ(最大の見落とし)/洗面所入口幅。排水口は写真で代替</li>
+        <li>冷蔵庫:幅/高さ/壁の側(ドアが開き切るか)。放熱は「上約5cm・左右約1cm」の一文に圧縮</li>
+        <li>カーテン:「窓ではなくランナーを測る」を宣言。掃き出しは−約1cm、腰窓は+約15cm</li>
+        <li>搬入経路:有効幅の概念+「一番狭い所」。通れるかの判定は背負わず「プロに数字を伝える」がゴール</li>
+        <li>各所に1行の「よくある失敗」— 読者に刺さり、測る動機になる</li>
+      </ul>
+    </div>
+
+    <div class="note-card">
+      <h3><span class="chip">ブランド</span>売らない・集めない・急かさない</h3>
+      <ul>
+        <li>冒頭は「ご入居おめでとうございます」から。売り込みで始めない</li>
+        <li>会社紹介は「宣伝ではなく署名」。最下部に2〜3文+BtoB向け1行のみ(合計5行以内)</li>
+        <li>入居者の問い合わせ導線は「管理会社さまへ」— 商流を荒らさない姿勢が管理会社への最強の営業</li>
+        <li>免責は「プロからの助言」の顔で書く。「メジャーがお手元にあるので実測を」でサービス案内と両立</li>
+        <li>命令形を使わない(「〜してください」→「〜すると安心です」)。感嘆符・絵文字なし</li>
+        <li>色はシールと同じ紺+白。アクセントはメジャーの目盛りの黄色を少量だけ</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

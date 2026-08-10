@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>引っ越し採寸ガイド — 超シンプル版(v4)</title>
+<style>
+  :root {
+    --fs-l: 22px; --fs-m: 16px; --fs-s: 13px;
+    --navy: #1b3358; --navy-deep: #142744; --navy-soft: #eef2f8;
+    --yellow: #f5c518; --arrow: #f0a000;
+    --ink: #2b3440; --gray: #6b7684; --line: #dde3ea;
+    --bg: #e9edf2;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    color: var(--ink); font-size: var(--fs-m); line-height: 1.7;
+    padding: 32px 16px 64px;
+  }
+  .stage { max-width: 720px; margin: 0 auto; }
+
+  .doc-head { text-align: center; margin-bottom: 28px; }
+  .doc-head .tag {
+    display: inline-block; background: var(--navy); color: #fff;
+    font-size: 12px; letter-spacing: .12em; padding: 4px 14px; border-radius: 999px;
+    margin-bottom: 10px;
+  }
+  .doc-head h1 { font-size: 20px; color: var(--navy-deep); }
+  .doc-head p { font-size: var(--fs-s); color: var(--gray); margin-top: 6px; }
+
+  .phone {
+    width: 100%; max-width: 399px; margin: 0 auto;
+    background: #10141a; border-radius: 44px; padding: 12px;
+    box-shadow: 0 24px 60px rgba(16,25,40,.35);
+  }
+  .phone .screen { background: #fff; border-radius: 34px; overflow: hidden; position: relative; }
+  .phone .notch {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 120px; height: 26px; background: #10141a; border-radius: 0 0 16px 16px; z-index: 9;
+  }
+
+  /* ヒーロー */
+  .hero { background: var(--navy); color: #fff; padding: 52px 22px 30px; }
+  .hero .welcome { font-size: var(--fs-m); opacity: .92; margin-bottom: 8px; }
+  .hero h2 { font-size: var(--fs-l); line-height: 1.5; }
+  .hero h2 .rule { border-bottom: 4px solid var(--yellow); padding-bottom: 2px; }
+  .hero .lead { font-size: var(--fs-s); opacity: .85; margin-top: 12px; }
+  .tape-strip { height: 14px; background: var(--yellow); position: relative; }
+  .tape-strip::before {
+    content: ""; position: absolute; inset: 0 0 auto 0; height: 6px;
+    background-image: repeating-linear-gradient(90deg, #10141a 0 2px, transparent 2px 10px);
+    opacity: .85;
+  }
+
+  /* 記録のしかた */
+  .record { padding: 20px 20px 4px; }
+  .record .card {
+    display: flex; gap: 12px; align-items: center;
+    background: var(--navy-soft); border-radius: 16px; padding: 14px 16px;
+  }
+  .record .ico {
+    flex: none; width: 44px; height: 44px; border-radius: 14px;
+    background: var(--navy); color: #fff; font-size: 20px;
+    display: grid; place-items: center;
+  }
+  .record b { color: var(--navy-deep); }
+  .record p { font-size: var(--fs-s); color: var(--gray); }
+  .record .big { font-size: var(--fs-m); color: var(--ink); }
+
+  /* セクション */
+  .sec { padding: 36px 20px 0; }
+  .sec + .sec { border-top: 1px solid var(--line); margin-top: 36px; }
+  .sec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .sec-head .num {
+    flex: none; width: 32px; height: 32px; border-radius: 10px;
+    background: var(--navy); color: #fff; font-weight: 700; font-size: var(--fs-m);
+    display: grid; place-items: center;
+  }
+  .sec-head h3 { font-size: var(--fs-l); color: var(--navy-deep); }
+  .sec figure {
+    background: var(--navy-soft); border-radius: 16px; padding: 16px 8px; margin-bottom: 14px;
+  }
+  .sec svg { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+  .spot {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 10px 2px; border-bottom: 1px dashed var(--line);
+  }
+  .spot:last-of-type { border-bottom: 0; }
+  .spot .tape {
+    flex: none; width: 22px; height: 22px; border-radius: 7px; margin-top: 3px;
+    background: var(--yellow); color: #4d3d05; font-size: 12px; font-weight: 700;
+    display: grid; place-items: center;
+  }
+  .spot p { font-size: var(--fs-m); }
+  .spot small { display: block; font-size: var(--fs-s); color: var(--gray); }
+
+  /* 免責・署名 */
+  .disclaim { padding: 32px 22px 0; font-size: var(--fs-s); color: var(--gray); }
+  .signature { background: var(--navy); color: #fff; padding: 24px 22px; margin-top: 24px; }
+  .signature p { font-size: var(--fs-s); opacity: .95; margin-bottom: 8px; }
+  .signature .co { font-size: var(--fs-m); font-weight: 700; margin: 14px 0 2px; }
+  .signature .placeholder {
+    display: inline-block; background: rgba(245,197,24,.18); color: var(--yellow);
+    border: 1px dashed rgba(245,197,24,.6); border-radius: 6px;
+    font-size: 11px; padding: 2px 8px; margin-left: 8px; vertical-align: middle;
+  }
+  .signature .btob {
+    border-top: 1px solid rgba(255,255,255,.18); margin-top: 14px; padding-top: 12px;
+    font-size: var(--fs-s); opacity: .75;
+  }
+
+  /* 設計メモ */
+  .notes { max-width: 640px; margin: 44px auto 0; }
+  .note-card {
+    background: #fffdf4; border: 2px solid var(--yellow); border-radius: 14px;
+    padding: 16px 18px;
+  }
+  .note-card h3 { font-size: 13.5px; color: var(--navy); margin-bottom: 6px; }
+  .note-card ul { list-style: none; }
+  .note-card li { font-size: 12.5px; padding-left: 16px; position: relative; margin-bottom: 5px; }
+  .note-card li::before { content: "・"; position: absolute; left: 0; color: var(--navy); }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <div class="doc-head">
+    <span class="tag">超シンプル版(v4)</span>
+    <h1>入力なし。「見る → 測る → 写真」だけ</h1>
+    <p>数字の記入機能を廃止。記録はメジャーを当てたまま写真1枚</p>
+  </div>
+
+  <div class="phone">
+    <div class="screen">
+      <div class="notch"></div>
+
+      <!-- ヒーロー -->
+      <header class="hero">
+        <p class="welcome">このお部屋をご検討・ご入居いただき、ありがとうございます。</p>
+        <h2>お部屋の<span class="rule">4か所</span>を、<br>このメジャーで。</h2>
+        <p class="lead">引っ越しの前に測っておくと安心な場所です。ざっくりでOK。気になるところだけでも大丈夫です。</p>
+      </header>
+      <div class="tape-strip"></div>
+
+      <!-- 記録のしかた -->
+      <div class="record">
+        <div class="card">
+          <div class="ico">📷</div>
+          <div>
+            <p class="big">測ったら、<b>メジャーを当てたまま写真を1枚。</b></p>
+            <p>それだけで記録は完了。お店や引っ越し屋さんに、そのまま見せられます。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1 洗濯機 -->
+      <section class="sec">
+        <div class="sec-head"><span class="num">1</span><h3>洗濯機を置くところ</h3></div>
+        <figure>
+          <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+            <line x1="30" y1="10" x2="30" y2="130" stroke="#8fa3bd" stroke-width="3"/>
+            <line x1="10" y1="130" x2="290" y2="130" stroke="#8fa3bd" stroke-width="3"/>
+            <rect x="30" y="30" width="28" height="9" rx="4" fill="#1b3358"/>
+            <rect x="49" y="39" width="9" height="14" rx="3" fill="#1b3358"/>
+            <text x="36" y="24" font-size="13" fill="#1b3358" font-weight="bold">蛇口</text>
+            <line x1="76" y1="50" x2="76" y2="127" stroke="#f0a000" stroke-width="3"/>
+            <path d="M76 50 l-5 10 h10 z" fill="#f0a000"/>
+            <path d="M76 127 l-5 -10 h10 z" fill="#f0a000"/>
+            <text x="86" y="80" font-size="13" fill="#6b5b1e" font-weight="bold">床から蛇口まで</text>
+            <path d="M110 112 h150 v18 h-150 z" fill="#fff" stroke="#1b3358" stroke-width="3"/>
+            <path d="M119 112 v-10 h132 v10" fill="none" stroke="#1b3358" stroke-width="3"/>
+            <text x="150" y="96" font-size="13" fill="#1b3358" font-weight="bold">受け皿</text>
+            <line x1="126" y1="120" x2="244" y2="120" stroke="#f0a000" stroke-width="3"/>
+            <path d="M126 120 l10 -5 v10 z" fill="#f0a000"/>
+            <path d="M244 120 l-10 -5 v10 z" fill="#f0a000"/>
+            <text x="150" y="146" font-size="13" fill="#6b5b1e" font-weight="bold">フチの内側から内側</text>
+          </svg>
+        </figure>
+        <div class="spot"><span class="tape">1</span><p>受け皿の内側(幅と奥行き)<small>フチの内側から、反対側の内側まで。</small></p></div>
+        <div class="spot"><span class="tape">2</span><p>床から、蛇口のいちばん下まで<small>ドラム式は高さ約105〜110cm。ここが低いと置けないことがあります。</small></p></div>
+      </section>
+
+      <!-- 2 冷蔵庫 -->
+      <section class="sec">
+        <div class="sec-head"><span class="num">2</span><h3>冷蔵庫を置くところ</h3></div>
+        <figure>
+          <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+            <rect x="70" y="8" width="160" height="22" fill="#8fa3bd"/>
+            <text x="86" y="23" font-size="13" fill="#fff">上の戸棚(なければ天井)</text>
+            <rect x="52" y="30" width="12" height="108" fill="#8fa3bd"/>
+            <rect x="236" y="30" width="12" height="108" fill="#8fa3bd"/>
+            <rect x="105" y="52" width="90" height="86" rx="6" fill="#fff" stroke="#1b3358" stroke-width="3"/>
+            <line x1="105" y1="88" x2="195" y2="88" stroke="#1b3358" stroke-width="2"/>
+            <line x1="222" y1="34" x2="222" y2="134" stroke="#f0a000" stroke-width="3"/>
+            <path d="M222 34 l-5 10 h10 z" fill="#f0a000"/>
+            <path d="M222 134 l-5 -10 h10 z" fill="#f0a000"/>
+            <line x1="68" y1="144" x2="232" y2="144" stroke="#f0a000" stroke-width="3"/>
+            <path d="M68 144 l10 -5 v10 z" fill="#f0a000"/>
+            <path d="M232 144 l-10 -5 v10 z" fill="#f0a000"/>
+            <text x="100" y="141" font-size="13" fill="#6b5b1e" font-weight="bold">いちばんせまい幅</text>
+          </svg>
+        </figure>
+        <div class="spot"><span class="tape">1</span><p>左右の壁の間(いちばんせまいところ)<small>左右に約1cmずつ、すき間が必要です。</small></p></div>
+        <div class="spot"><span class="tape">2</span><p>床から、上の戸棚(なければ天井)まで<small>上にも約5cmのすき間が必要です。</small></p></div>
+        <div class="spot"><span class="tape">3</span><p>近い壁は、左と右のどちらか見ておく<small>ドアは、壁と反対側に開くものを選ぶと安心です。</small></p></div>
+      </section>
+
+      <!-- 3 カーテン -->
+      <section class="sec">
+        <div class="sec-head"><span class="num">3</span><h3>カーテン(窓まわり)</h3></div>
+        <figure>
+          <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+            <rect x="30" y="18" width="240" height="9" rx="4" fill="#1b3358"/>
+            <g fill="none" stroke="#1b3358" stroke-width="2">
+              <circle cx="42" cy="35" r="6"/>
+              <circle cx="98" cy="35" r="4" opacity=".3"/>
+              <circle cx="150" cy="35" r="4" opacity=".3"/>
+              <circle cx="202" cy="35" r="4" opacity=".3"/>
+              <circle cx="258" cy="35" r="6"/>
+            </g>
+            <text x="20" y="57" font-size="13" fill="#1b3358" font-weight="bold">動かない輪</text>
+            <text x="212" y="57" font-size="13" fill="#1b3358" font-weight="bold">動かない輪</text>
+            <line x1="42" y1="70" x2="258" y2="70" stroke="#f0a000" stroke-width="3"/>
+            <path d="M42 70 l10 -5 v10 z" fill="#f0a000"/>
+            <path d="M258 70 l-10 -5 v10 z" fill="#f0a000"/>
+            <text x="112" y="88" font-size="13" fill="#6b5b1e" font-weight="bold">輪から輪まで</text>
+            <line x1="42" y1="42" x2="42" y2="138" stroke="#f0a000" stroke-width="3" stroke-dasharray="6 4"/>
+            <path d="M42 138 l-5 -10 h10 z" fill="#f0a000"/>
+            <text x="54" y="126" font-size="13" fill="#6b5b1e" font-weight="bold">輪の下から床まで</text>
+            <line x1="24" y1="142" x2="280" y2="142" stroke="#8fa3bd" stroke-width="3"/>
+          </svg>
+        </figure>
+        <div class="spot"><span class="tape">1</span><p>幅 — はしの「動かない輪」から、輪まで<small>測るのは窓ではなく、レールの下の小さな輪です。</small></p></div>
+        <div class="spot"><span class="tape">2</span><p>長さ — 輪の下から、床まで<small>腰の高さの窓は、窓わくのいちばん下まで。</small></p></div>
+      </section>
+
+      <!-- 4 通り道 -->
+      <section class="sec">
+        <div class="sec-head"><span class="num">4</span><h3>大きな荷物の通り道</h3></div>
+        <figure>
+          <svg viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+            <text x="60" y="16" font-size="13" fill="#1b3358" font-weight="bold">玄関を上から見た図</text>
+            <rect x="30" y="60" width="60" height="14" fill="#8fa3bd"/>
+            <rect x="210" y="60" width="60" height="14" fill="#8fa3bd"/>
+            <line x1="90" y1="67" x2="130" y2="24" stroke="#1b3358" stroke-width="5"/>
+            <text x="134" y="30" font-size="13" fill="#1b3358">開けたドア</text>
+            <circle cx="122" cy="35" r="4" fill="#f0a000"/>
+            <line x1="126" y1="67" x2="206" y2="67" stroke="#f0a000" stroke-width="3"/>
+            <path d="M126 67 l10 -5 v10 z" fill="#f0a000"/>
+            <path d="M206 67 l-10 -5 v10 z" fill="#f0a000"/>
+            <text x="92" y="94" font-size="13" fill="#6b5b1e" font-weight="bold">ノブの内側 → わくまで</text>
+            <path d="M90 67 A60 60 0 0 1 150 122" fill="none" stroke="#1b3358" stroke-width="1.5" stroke-dasharray="4 4"/>
+          </svg>
+        </figure>
+        <div class="spot"><span class="tape">1</span><p>玄関の、通れる幅<small>ドアをいっぱいまで開けて、ノブの出っぱりの内側で。</small></p></div>
+        <div class="spot"><span class="tape">2</span><p>家の中で、いちばんせまいところ<small>洗面所とキッチンの入口が、特にせまいことが多いです。</small></p></div>
+        <div class="spot"><span class="tape">3</span><p>エレベーターの入口の幅と、中の奥行き<small>通れるかどうかは、写真をお店や引っ越し屋さんに見せれば大丈夫。</small></p></div>
+      </section>
+
+      <!-- 免責 -->
+      <section class="disclaim">
+        <p>お部屋のサイズは、同じ間取りでも一戸ごとに少しずつ違います。このページの「約◯cm」は目安です。買う前に、実際の場所を測ってください。</p>
+      </section>
+
+      <!-- 会社署名 -->
+      <footer class="signature">
+        <p>このお部屋は、〔会社名〕が担当しました。次に入る方が気持ちよく暮らせるように、お部屋を直す工事をして、このメジャーを置いています。</p>
+        <p>お部屋のことで気になる点は、管理会社さまにお知らせください。</p>
+        <div class="co">〔会社名・ロゴ〕<span class="placeholder">※実名・連絡先は後藤さん確認後に差し替え</span></div>
+        <div class="btob">この採寸ガイドを置いてみたいオーナー様・管理会社様は、〔問い合わせ先〕へご相談ください。</div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- 設計メモ -->
+  <div class="notes">
+    <div class="note-card">
+      <h3>v4での変更 — 超シンプル化</h3>
+      <ul>
+        <li>数字の入力機能・自動集計・進捗バー・目次をすべて廃止。JavaScriptゼロの完全静的ページに</li>
+        <li>記録手段は「メジャーを当てたまま写真を1枚」に一本化し、冒頭で1回だけ案内</li>
+        <li>1か所=図1枚+測るところ2〜3行のみ。ページ全体で1分あれば読み切れる分量</li>
+        <li>やさしい日本語(専門用語ゼロ)・紺+白+黄の配色・「約◯cm」表記・署名スタイルの会社紹介は継続</li>
+        <li>実装が最も軽く、全物件共通・メンテナンス不要というサービス方針に一番忠実な案</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

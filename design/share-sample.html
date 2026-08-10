@@ -1,314 +1,144 @@
 <style>
   :root {
     --navy: #16304F;
-    --navy-deep: #0F2239;
-    --tape: #F2C230;
-    --tick: #1A1D22;
-    --ground: #EDF0F4;
-    --surface: #FFFFFF;
     --ink: #101820;
-    --muted: #56616F;
-    --line: #D4DAE3;
+    --muted: #5A6472;
+    --ground: #EFF2F5;
+    --surface: #FFFFFF;
+    --line: #D8DEE6;
     --sans: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic Medium", "Yu Gothic", "Noto Sans JP", "Meiryo", sans-serif;
-    --mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", monospace;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
-      --ground: #0D1520;
-      --surface: #17212D;
-      --ink: #E7EDF4;
-      --muted: #9BA8B7;
-      --line: #26374A;
-      --navy: #1B3A5E;
-      --navy-deep: #12293F;
-    }
+    :root { --ground:#0E1620; --surface:#18222E; --ink:#E8EDF3; --muted:#9AA7B6; --line:#27384B; --navy:#1D3E63; }
   }
-  :root[data-theme="dark"] {
-    --ground: #0D1520;
-    --surface: #17212D;
-    --ink: #E7EDF4;
-    --muted: #9BA8B7;
-    --line: #26374A;
-    --navy: #1B3A5E;
-    --navy-deep: #12293F;
-  }
-  :root[data-theme="light"] {
-    --ground: #EDF0F4;
-    --surface: #FFFFFF;
-    --ink: #101820;
-    --muted: #56616F;
-    --line: #D4DAE3;
-    --navy: #16304F;
-    --navy-deep: #0F2239;
-  }
+  :root[data-theme="dark"] { --ground:#0E1620; --surface:#18222E; --ink:#E8EDF3; --muted:#9AA7B6; --line:#27384B; --navy:#1D3E63; }
+  :root[data-theme="light"] { --ground:#EFF2F5; --surface:#FFFFFF; --ink:#101820; --muted:#5A6472; --line:#D8DEE6; --navy:#16304F; }
 
   * { box-sizing: border-box; }
   body {
-    margin: 0;
-    background: var(--ground);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 16px;
-    line-height: 1.85;
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: var(--sans); font-size: 16px; line-height: 1.8;
     -webkit-text-size-adjust: 100%;
   }
-  .page { max-width: 760px; margin: 0 auto; padding: 0 0 72px; }
-  .col { padding: 0 24px; }
+  .sheet { max-width: 520px; margin: 0 auto; padding: 40px 20px 64px; }
+  :focus-visible { outline: 3px solid #F2C230; outline-offset: 3px; }
 
-  a { color: inherit; }
-  :focus-visible { outline: 3px solid var(--tape); outline-offset: 3px; }
+  h1 { margin: 0 0 8px; font-size: 21px; letter-spacing: -.01em; }
+  .sub { margin: 0 0 28px; font-size: 14px; color: var(--muted); }
 
-  /* ── 見出し ───────────────────────── */
-  header.intro { padding: 56px 24px 34px; }
-  .eyebrow {
-    font-family: var(--mono);
-    font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--muted); margin: 0 0 18px;
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 6px; padding: 24px 20px; margin-bottom: 20px;
   }
-  h1 {
-    margin: 0; font-size: clamp(27px, 6.2vw, 40px); line-height: 1.35;
-    letter-spacing: -.02em; font-weight: 700; text-wrap: balance;
-  }
-  h1 .hl { box-shadow: inset 0 -.38em 0 rgba(242,194,48,.55); }
-  .lead { margin: 20px 0 0; color: var(--muted); font-size: 15px; max-width: 34em; }
+  .card figure { margin: 0; }
+  .card svg.measure { width: 100%; height: auto; display: block; }
+  figcaption { margin-top: 14px; font-size: 12.5px; color: var(--muted); line-height: 1.7; }
 
-  /* ── メジャーの目盛り(区切り) ─────────── */
-  .tape-rule {
-    height: 34px;
-    background-color: var(--tape);
-    background-image:
-      repeating-linear-gradient(90deg, var(--tick) 0 1.5px, transparent 1.5px 60px),
-      repeating-linear-gradient(90deg, var(--tick) 0 1px, transparent 1px 12px);
-    background-size: 100% 18px, 100% 9px;
-    background-repeat: repeat-x, repeat-x;
-    background-position: 0 0, 0 0;
+  .qr-card { text-align: center; }
+  .qr-card h2 { margin: 0 0 6px; font-size: 17px; }
+  .qr-card p { margin: 0 0 20px; font-size: 13.5px; color: var(--muted); }
+  .plaque {
+    width: 240px; max-width: 100%; aspect-ratio: 1 / 1;
+    margin: 0 auto; padding: 14px;
+    background: #FFFFFF; border: 1px solid #E2E7ED; border-radius: 6px;
   }
-
-  /* ── 現物イメージ ───────────────────── */
-  .stage {
-    background: var(--navy);
-    padding: 40px 24px 30px;
-    text-align: center;
-  }
-  .stage svg { width: min(100%, 430px); height: auto; display: block; margin: 0 auto; }
-  .stage figcaption {
-    margin: 22px auto 0; max-width: 30em;
-    color: #B9C6D6; font-size: 13px; line-height: 1.75;
-  }
-  .stage figure { margin: 0; }
-
-  /* ── QRパネル ──────────────────────── */
-  .qr-block { padding: 40px 24px 8px; }
-  .qr-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 30px 26px;
-    display: flex; flex-wrap: wrap; gap: 28px; align-items: center;
-  }
-  .qr-plaque {
-    flex: none; background: #FFFFFF; padding: 14px;
-    border-radius: 4px; border: 1px solid #E1E6EC;
-    width: 208px; height: 208px;
-  }
-  .qr-plaque svg { width: 100%; height: 100%; display: block; }
-  .qr-text { flex: 1 1 230px; min-width: 0; }
-  .qr-text h2 { margin: 0 0 10px; font-size: 19px; letter-spacing: -.01em; }
-  .qr-text p { margin: 0; color: var(--muted); font-size: 14px; }
+  .plaque svg { width: 100%; height: 100%; display: block; }
   .btn {
-    display: inline-block; margin-top: 18px;
+    display: inline-block; margin-top: 20px;
     background: var(--navy); color: #fff; text-decoration: none;
-    font-size: 14px; font-weight: 700; padding: 13px 20px; border-radius: 4px;
-    transition: background .15s ease;
+    font-size: 14px; font-weight: 700; padding: 13px 22px; border-radius: 6px;
   }
-  .btn:hover { background: var(--navy-deep); }
-  .url {
-    font-family: var(--mono); font-size: 11.5px; color: var(--muted);
-    margin-top: 14px; word-break: break-all; line-height: 1.6;
-  }
-
-  /* ── 流れ ─────────────────────────── */
-  .flow { padding: 44px 24px 0; }
-  .sec-label {
-    font-family: var(--mono); font-size: 12px; letter-spacing: .14em;
-    text-transform: uppercase; color: var(--muted); margin: 0 0 20px;
-  }
-  ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
-  ol.steps li {
-    background: var(--surface); border: 1px solid var(--line);
-    padding: 20px 22px; display: flex; gap: 18px; align-items: baseline;
-  }
-  ol.steps li:first-child { border-radius: 4px 4px 0 0; }
-  ol.steps li:last-child { border-radius: 0 0 4px 4px; }
-  ol.steps .n {
-    flex: none; font-family: var(--mono); font-size: 13px; font-weight: 700;
-    color: var(--navy); background: var(--tape);
-    width: 26px; height: 26px; border-radius: 50%;
-    display: grid; place-items: center; line-height: 1;
-  }
-  ol.steps b { display: block; font-size: 16px; margin-bottom: 3px; }
-  ol.steps span { color: var(--muted); font-size: 14px; }
-
-  /* ── 決まっていること ───────────────── */
-  .grid2 { padding: 44px 24px 0; display: grid; gap: 22px; }
-  @media (min-width: 640px) { .grid2 .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; } }
-  .panel {
-    background: var(--surface); border: 1px solid var(--line);
-    border-radius: 4px; padding: 22px 24px;
-  }
-  .panel h3 {
-    margin: 0 0 14px; font-size: 15px; letter-spacing: -.01em;
-    padding-bottom: 12px; border-bottom: 1px solid var(--line);
-  }
-  .panel ul { margin: 0; padding: 0; list-style: none; }
-  .panel li {
-    font-size: 14px; color: var(--muted); padding-left: 17px;
-    position: relative; margin-bottom: 9px; line-height: 1.7;
-  }
-  .panel li:last-child { margin-bottom: 0; }
-  .panel li::before {
-    content: ""; position: absolute; left: 0; top: 10px;
-    width: 7px; height: 1.5px; background: var(--tape);
-  }
-  .panel.open li::before { background: var(--muted); }
-
-  .spec {
-    margin: 22px 24px 0; padding: 16px 18px;
-    border: 1px dashed var(--line); border-radius: 4px;
-    font-family: var(--mono); font-size: 12px; color: var(--muted);
-    line-height: 1.9; word-break: break-word;
-  }
-  .spec b { color: var(--ink); font-weight: 700; }
-
-  footer.note {
-    margin-top: 40px; padding: 24px; border-top: 1px solid var(--line);
-    font-size: 12.5px; color: var(--muted); line-height: 1.8;
-  }
+  .note { font-size: 12px; color: var(--muted); line-height: 1.8; margin: 0; }
 </style>
 
-<div class="page">
+<div class="sheet">
 
-  <header class="intro">
-    <p class="eyebrow">社内共有用サンプル / 2026-08-10</p>
-    <h1>空室に置いたメジャーから、<br><span class="hl">引っ越しの採寸ガイド</span>へ。</h1>
-    <p class="lead">原状回復したお部屋にオリジナルのメジャーを置き、シールのQRコードから採寸ガイドを開いてもらう仕組みです。下のQRコードは実際に読み取れます。お手元のスマートフォンで試してみてください。</p>
-  </header>
+  <h1>メジャーにシールを貼ったイメージ</h1>
+  <p class="sub">下のQRコードを、スマホのカメラで読み取ってみてください。</p>
 
-  <div class="tape-rule" role="presentation"></div>
-
-  <div class="stage">
+  <div class="card">
     <figure>
-      <svg viewBox="0 0 440 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="丸型メジャーの上面イメージ。白い本体の中央に、QRコードと「ご自由にお使いください」の文字が入った紺色のシールが貼られている">
+      <svg class="measure" viewBox="0 0 460 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="丸型メジャーにQRコード入りのシールを貼ったイメージ">
         <defs>
-          <radialGradient id="case" cx="34%" cy="26%" r="82%">
+          <radialGradient id="face" cx="34%" cy="24%" r="84%">
             <stop offset="0%" stop-color="#FFFFFF"/>
-            <stop offset="62%" stop-color="#F4F6F8"/>
-            <stop offset="100%" stop-color="#DFE4EA"/>
+            <stop offset="58%" stop-color="#F5F7F9"/>
+            <stop offset="100%" stop-color="#E2E7EC"/>
           </radialGradient>
-          <filter id="soft" x="-30%" y="-30%" width="160%" height="180%">
-            <feGaussianBlur stdDeviation="14"/>
+          <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#E4E9EE"/>
+            <stop offset="100%" stop-color="#C7CFD8"/>
+          </linearGradient>
+          <filter id="blur" x="-30%" y="-40%" width="160%" height="200%">
+            <feGaussianBlur stdDeviation="13"/>
           </filter>
+          <mask id="wallmask">
+            <rect width="460" height="400" fill="#000"/>
+            <ellipse cx="230" cy="214" rx="155" ry="136" fill="#fff"/>
+            <ellipse cx="230" cy="180" rx="155" ry="136" fill="#000"/>
+          </mask>
         </defs>
 
-        <ellipse cx="228" cy="342" rx="150" ry="20" fill="#000" opacity=".34" filter="url(#soft)"/>
+        <!-- 影 -->
+        <ellipse cx="234" cy="356" rx="146" ry="16" fill="#26313E" opacity=".22" filter="url(#blur)"/>
 
         <!-- 引き出しフック(黒) -->
-        <g transform="rotate(-12 90 186)">
-          <rect x="22" y="167" width="70" height="38" rx="6" fill="#26292F"/>
-          <g stroke="#4E535B" stroke-width="2.6" stroke-linecap="round">
-            <line x1="32" y1="176" x2="82" y2="176"/>
-            <line x1="32" y1="184" x2="82" y2="184"/>
-            <line x1="32" y1="192" x2="82" y2="192"/>
-            <line x1="32" y1="200" x2="82" y2="200"/>
+        <g transform="rotate(-9 84 156)">
+          <rect x="14" y="136" width="70" height="36" rx="6" fill="#292C32"/>
+          <g stroke="#565C65" stroke-width="2.4" stroke-linecap="round">
+            <line x1="24" y1="145" x2="74" y2="145"/>
+            <line x1="24" y1="153" x2="74" y2="153"/>
+            <line x1="24" y1="161" x2="74" y2="161"/>
           </g>
-          <rect x="12" y="162" width="12" height="48" rx="3" fill="#15171B"/>
+          <rect x="6" y="131" width="11" height="46" rx="3" fill="#17191D"/>
         </g>
 
-        <!-- 本体(丸型ケース) -->
-        <circle cx="228" cy="186" r="152" fill="url(#case)"/>
-        <circle cx="228" cy="186" r="152" fill="none" stroke="#C6CDD6" stroke-width="2"/>
-        <!-- 側面のギザギザ(グリップ) -->
-        <circle cx="228" cy="186" r="141" fill="none" stroke="#CBD2DA" stroke-width="19"
-                stroke-dasharray="2.4 4.4"/>
-        <circle cx="228" cy="186" r="130" fill="#FBFCFD" stroke="#DDE3E9" stroke-width="1.5"/>
+        <!-- 側面(ギザギザのグリップ) -->
+        <ellipse cx="230" cy="214" rx="155" ry="136" fill="url(#wall)"/>
+        <g mask="url(#wallmask)" stroke="#A9B3BE" stroke-width="2.2">
+          <line x1="80" y1="200" x2="80" y2="360"/><line x1="96" y1="200" x2="96" y2="360"/>
+          <line x1="112" y1="200" x2="112" y2="360"/><line x1="128" y1="200" x2="128" y2="360"/>
+          <line x1="144" y1="200" x2="144" y2="360"/><line x1="160" y1="200" x2="160" y2="360"/>
+          <line x1="176" y1="200" x2="176" y2="360"/><line x1="192" y1="200" x2="192" y2="360"/>
+          <line x1="208" y1="200" x2="208" y2="360"/><line x1="224" y1="200" x2="224" y2="360"/>
+          <line x1="240" y1="200" x2="240" y2="360"/><line x1="256" y1="200" x2="256" y2="360"/>
+          <line x1="272" y1="200" x2="272" y2="360"/><line x1="288" y1="200" x2="288" y2="360"/>
+          <line x1="304" y1="200" x2="304" y2="360"/><line x1="320" y1="200" x2="320" y2="360"/>
+          <line x1="336" y1="200" x2="336" y2="360"/><line x1="352" y1="200" x2="352" y2="360"/>
+          <line x1="368" y1="200" x2="368" y2="360"/>
+        </g>
+
+        <!-- 上面 -->
+        <ellipse cx="230" cy="180" rx="155" ry="136" fill="url(#face)"/>
+        <ellipse cx="230" cy="180" rx="155" ry="136" fill="none" stroke="#C9D1DA" stroke-width="1.6"/>
+        <ellipse cx="230" cy="180" rx="140" ry="122" fill="none" stroke="#E6EAEF" stroke-width="1.4"/>
 
         <!-- シール(40×40mm・角丸3mm・紺1色+白) -->
-        <rect x="152" y="110" width="152" height="152" rx="9" fill="#16304F"/>
-        <rect x="184" y="128" width="72" height="72" rx="2" fill="#FFFFFF"/>
-        <g transform="translate(188 132) scale(1.7297)" shape-rendering="crispEdges">
-          <path stroke="#16304F" d="M0 0.5h7m3 0h1m1 0h3m6 0h1m1 0h1m4 0h1m1 0h7M0 1.5h1m5 0h1m6 0h2m2 0h2m1 0h1m3 0h1m2 0h2m1 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h2m2 0h2m1 0h1m5 0h1m4 0h1m3 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h1m4 0h1m2 0h2m2 0h1m1 0h1m2 0h3m2 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m5 0h1m2 0h3m1 0h3m4 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h1m1 0h2m1 0h5m2 0h3m4 0h1m2 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h1m2 0h3m1 0h1m1 0h2m1 0h3m1 0h1m1 0h1m1 0h1M0 8.5h1m1 0h5m2 0h1m1 0h2m1 0h3m4 0h1m2 0h3m1 0h1m1 0h5M3 9.5h1m3 0h4m1 0h2m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m5 0h1m3 0h1M0 10.5h1m2 0h1m2 0h2m4 0h2m1 0h2m2 0h1m1 0h2m4 0h1m2 0h2m3 0h2M2 11.5h1m4 0h5m1 0h1m1 0h1m2 0h4m4 0h4m1 0h3m2 0h1M2 12.5h2m1 0h3m1 0h9m1 0h2m1 0h1m1 0h2m1 0h1m1 0h2m1 0h5M0 13.5h1m4 0h1m1 0h1m1 0h5m4 0h2m3 0h1m7 0h1m3 0h1M0 14.5h1m2 0h5m1 0h4m2 0h2m1 0h1m1 0h1m1 0h1m2 0h1m1 0h2m1 0h4m2 0h1M2 15.5h1m2 0h1m1 0h6m1 0h3m2 0h2m2 0h1m3 0h2m2 0h2m2 0h2M4 16.5h1m1 0h4m1 0h1m1 0h1m4 0h6m1 0h1m1 0h1m2 0h1m1 0h1m1 0h3M4 17.5h1m4 0h1m2 0h1m1 0h3m6 0h4m1 0h2m4 0h2M0 18.5h5m1 0h3m1 0h2m1 0h2m5 0h2m2 0h6m1 0h1m3 0h2M0 19.5h2m1 0h2m2 0h3m1 0h1m1 0h1m2 0h1m1 0h1m2 0h4m1 0h3m1 0h2m1 0h1m2 0h1M2 20.5h2m1 0h3m1 0h3m2 0h1m2 0h2m3 0h1m1 0h3m2 0h2m1 0h1m1 0h1M0 21.5h2m1 0h3m1 0h2m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m1 0h2m3 0h1m4 0h1m1 0h1M0 22.5h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h3m1 0h3m3 0h1m3 0h1m1 0h1m1 0h5m2 0h1M1 23.5h4m2 0h3m1 0h2m1 0h5m1 0h3m3 0h4m1 0h2M2 24.5h3m1 0h3m2 0h1m1 0h4m4 0h1m2 0h2m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1M0 25.5h2m1 0h2m2 0h2m1 0h1m4 0h1m2 0h1m1 0h4m2 0h1m2 0h1m1 0h1M0 26.5h1m1 0h1m1 0h1m1 0h2m4 0h5m2 0h1m2 0h1m2 0h1m1 0h1m2 0h2m1 0h1m1 0h2M0 27.5h1m1 0h1m1 0h2m4 0h2m2 0h2m3 0h3m2 0h1m1 0h1m2 0h2m2 0h1m2 0h1M0 28.5h1m1 0h3m1 0h1m1 0h2m3 0h1m1 0h1m1 0h4m1 0h1m1 0h9m1 0h3M8 29.5h2m2 0h1m3 0h1m2 0h2m2 0h1m3 0h2m3 0h2M0 30.5h7m3 0h1m1 0h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h3M0 31.5h1m5 0h1m1 0h1m1 0h1m2 0h2m4 0h1m6 0h1m1 0h1m3 0h2m1 0h2M0 32.5h1m1 0h3m1 0h1m1 0h1m2 0h5m2 0h1m1 0h3m2 0h1m1 0h6m1 0h1m1 0h1M0 33.5h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h4m3 0h1m1 0h4m2 0h2m1 0h2m2 0h1M0 34.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m5 0h1m1 0h2m3 0h2m2 0h1m5 0h2M0 35.5h1m5 0h1m2 0h1m2 0h1m1 0h1m1 0h1m1 0h1m2 0h4m1 0h3m1 0h1m1 0h2m2 0h1M0 36.5h7m1 0h2m1 0h1m4 0h3m3 0h1m1 0h3m2 0h2m1 0h1m1 0h3"/>
+        <g transform="translate(230 180) scale(1 0.878) translate(-230 -180)">
+          <rect x="155" y="104" width="150" height="150" rx="9" fill="#16304F"/>
+          <rect x="189" y="118" width="82" height="82" rx="2" fill="#FFFFFF"/>
+          <g transform="translate(193 122) scale(2)" shape-rendering="crispEdges">
+            <path stroke="#16304F" d="M0 0.5h7m3 0h1m1 0h3m6 0h1m1 0h1m4 0h1m1 0h7M0 1.5h1m5 0h1m6 0h2m2 0h2m1 0h1m3 0h1m2 0h2m1 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h2m2 0h2m1 0h1m5 0h1m4 0h1m3 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h1m4 0h1m2 0h2m2 0h1m1 0h1m2 0h3m2 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m5 0h1m2 0h3m1 0h3m4 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h1m1 0h2m1 0h5m2 0h3m4 0h1m2 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h1m2 0h3m1 0h1m1 0h2m1 0h3m1 0h1m1 0h1m1 0h1M0 8.5h1m1 0h5m2 0h1m1 0h2m1 0h3m4 0h1m2 0h3m1 0h1m1 0h5M3 9.5h1m3 0h4m1 0h2m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m5 0h1m3 0h1M0 10.5h1m2 0h1m2 0h2m4 0h2m1 0h2m2 0h1m1 0h2m4 0h1m2 0h2m3 0h2M2 11.5h1m4 0h5m1 0h1m1 0h1m2 0h4m4 0h4m1 0h3m2 0h1M2 12.5h2m1 0h3m1 0h9m1 0h2m1 0h1m1 0h2m1 0h1m1 0h2m1 0h5M0 13.5h1m4 0h1m1 0h1m1 0h5m4 0h2m3 0h1m7 0h1m3 0h1M0 14.5h1m2 0h5m1 0h4m2 0h2m1 0h1m1 0h1m1 0h1m2 0h1m1 0h2m1 0h4m2 0h1M2 15.5h1m2 0h1m1 0h6m1 0h3m2 0h2m2 0h1m3 0h2m2 0h2m2 0h2M4 16.5h1m1 0h4m1 0h1m1 0h1m4 0h6m1 0h1m1 0h1m2 0h1m1 0h1m1 0h3M4 17.5h1m4 0h1m2 0h1m1 0h3m6 0h4m1 0h2m4 0h2M0 18.5h5m1 0h3m1 0h2m1 0h2m5 0h2m2 0h6m1 0h1m3 0h2M0 19.5h2m1 0h2m2 0h3m1 0h1m1 0h1m2 0h1m1 0h1m2 0h4m1 0h3m1 0h2m1 0h1m2 0h1M2 20.5h2m1 0h3m1 0h3m2 0h1m2 0h2m3 0h1m1 0h3m2 0h2m1 0h1m1 0h1M0 21.5h2m1 0h3m1 0h2m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m1 0h2m3 0h1m4 0h1m1 0h1M0 22.5h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h3m1 0h3m3 0h1m3 0h1m1 0h1m1 0h5m2 0h1M1 23.5h4m2 0h3m1 0h2m1 0h5m1 0h3m3 0h4m1 0h2M2 24.5h3m1 0h3m2 0h1m1 0h4m4 0h1m2 0h2m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1M0 25.5h2m1 0h2m2 0h2m1 0h1m4 0h1m2 0h1m1 0h4m2 0h1m2 0h1m1 0h1M0 26.5h1m1 0h1m1 0h1m1 0h2m4 0h5m2 0h1m2 0h1m2 0h1m1 0h1m2 0h2m1 0h1m1 0h2M0 27.5h1m1 0h1m1 0h2m4 0h2m2 0h2m3 0h3m2 0h1m1 0h1m2 0h2m2 0h1m2 0h1M0 28.5h1m1 0h3m1 0h1m1 0h2m3 0h1m1 0h1m1 0h4m1 0h1m1 0h9m1 0h3M8 29.5h2m2 0h1m3 0h1m2 0h2m2 0h1m3 0h2m3 0h2M0 30.5h7m3 0h1m1 0h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h3M0 31.5h1m5 0h1m1 0h1m1 0h1m2 0h2m4 0h1m6 0h1m1 0h1m3 0h2m1 0h2M0 32.5h1m1 0h3m1 0h1m1 0h1m2 0h5m2 0h1m1 0h3m2 0h1m1 0h6m1 0h1m1 0h1M0 33.5h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h4m3 0h1m1 0h4m2 0h2m1 0h2m2 0h1M0 34.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m5 0h1m1 0h2m3 0h2m2 0h1m5 0h2M0 35.5h1m5 0h1m2 0h1m2 0h1m1 0h1m1 0h1m1 0h1m2 0h4m1 0h3m1 0h1m1 0h2m2 0h1M0 36.5h7m1 0h2m1 0h1m4 0h3m3 0h1m1 0h3m2 0h2m1 0h1m1 0h3"/>
+          </g>
+          <text x="230" y="222" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-size="12.5" font-weight="bold">ご自由にお使いください</text>
+          <text x="230" y="240" text-anchor="middle" fill="#A3B7CE" font-family="sans-serif" font-size="10">引っ越しの採寸ガイド</text>
         </g>
-        <text x="228" y="222" text-anchor="middle" fill="#FFFFFF"
-              font-family="sans-serif" font-size="15" font-weight="bold">ご自由にお使いください</text>
-        <text x="228" y="243" text-anchor="middle" fill="#9FB4CD"
-              font-family="sans-serif" font-size="11">引っ越しの採寸ガイド</text>
       </svg>
-      <figcaption>サンプルイメージです。実際に使うメジャーはこれとは別のものになります。シールは紺1色+白の40×40mm角丸。</figcaption>
+      <figcaption>お送りいただいた写真をもとにした作図です。実際のメジャーは別のものになります。シールは紺1色+白・40×40mm。</figcaption>
     </figure>
   </div>
 
-  <section class="qr-block">
-    <div class="qr-card">
-      <div class="qr-plaque">
-        <svg viewBox="0 0 37 37" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="採寸ガイドページを開くQRコード">
-          <path stroke="#16304F" d="M0 0.5h7m3 0h1m1 0h3m6 0h1m1 0h1m4 0h1m1 0h7M0 1.5h1m5 0h1m6 0h2m2 0h2m1 0h1m3 0h1m2 0h2m1 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h2m2 0h2m1 0h1m5 0h1m4 0h1m3 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h1m4 0h1m2 0h2m2 0h1m1 0h1m2 0h3m2 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m5 0h1m2 0h3m1 0h3m4 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h1m1 0h2m1 0h5m2 0h3m4 0h1m2 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h1m2 0h3m1 0h1m1 0h2m1 0h3m1 0h1m1 0h1m1 0h1M0 8.5h1m1 0h5m2 0h1m1 0h2m1 0h3m4 0h1m2 0h3m1 0h1m1 0h5M3 9.5h1m3 0h4m1 0h2m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m5 0h1m3 0h1M0 10.5h1m2 0h1m2 0h2m4 0h2m1 0h2m2 0h1m1 0h2m4 0h1m2 0h2m3 0h2M2 11.5h1m4 0h5m1 0h1m1 0h1m2 0h4m4 0h4m1 0h3m2 0h1M2 12.5h2m1 0h3m1 0h9m1 0h2m1 0h1m1 0h2m1 0h1m1 0h2m1 0h5M0 13.5h1m4 0h1m1 0h1m1 0h5m4 0h2m3 0h1m7 0h1m3 0h1M0 14.5h1m2 0h5m1 0h4m2 0h2m1 0h1m1 0h1m1 0h1m2 0h1m1 0h2m1 0h4m2 0h1M2 15.5h1m2 0h1m1 0h6m1 0h3m2 0h2m2 0h1m3 0h2m2 0h2m2 0h2M4 16.5h1m1 0h4m1 0h1m1 0h1m4 0h6m1 0h1m1 0h1m2 0h1m1 0h1m1 0h3M4 17.5h1m4 0h1m2 0h1m1 0h3m6 0h4m1 0h2m4 0h2M0 18.5h5m1 0h3m1 0h2m1 0h2m5 0h2m2 0h6m1 0h1m3 0h2M0 19.5h2m1 0h2m2 0h3m1 0h1m1 0h1m2 0h1m1 0h1m2 0h4m1 0h3m1 0h2m1 0h1m2 0h1M2 20.5h2m1 0h3m1 0h3m2 0h1m2 0h2m3 0h1m1 0h3m2 0h2m1 0h1m1 0h1M0 21.5h2m1 0h3m1 0h2m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m1 0h2m3 0h1m4 0h1m1 0h1M0 22.5h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h3m1 0h3m3 0h1m3 0h1m1 0h1m1 0h5m2 0h1M1 23.5h4m2 0h3m1 0h2m1 0h5m1 0h3m3 0h4m1 0h2M2 24.5h3m1 0h3m2 0h1m1 0h4m4 0h1m2 0h2m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1M0 25.5h2m1 0h2m2 0h2m1 0h1m4 0h1m2 0h1m1 0h4m2 0h1m2 0h1m1 0h1M0 26.5h1m1 0h1m1 0h1m1 0h2m4 0h5m2 0h1m2 0h1m2 0h1m1 0h1m2 0h2m1 0h1m1 0h2M0 27.5h1m1 0h1m1 0h2m4 0h2m2 0h2m3 0h3m2 0h1m1 0h1m2 0h2m2 0h1m2 0h1M0 28.5h1m1 0h3m1 0h1m1 0h2m3 0h1m1 0h1m1 0h4m1 0h1m1 0h9m1 0h3M8 29.5h2m2 0h1m3 0h1m2 0h2m2 0h1m3 0h2m3 0h2M0 30.5h7m3 0h1m1 0h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h3M0 31.5h1m5 0h1m1 0h1m1 0h1m2 0h2m4 0h1m6 0h1m1 0h1m3 0h2m1 0h2M0 32.5h1m1 0h3m1 0h1m1 0h1m2 0h5m2 0h1m1 0h3m2 0h1m1 0h6m1 0h1m1 0h1M0 33.5h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h4m3 0h1m1 0h4m2 0h2m1 0h2m2 0h1M0 34.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m5 0h1m1 0h2m3 0h2m2 0h1m5 0h2M0 35.5h1m5 0h1m2 0h1m2 0h1m1 0h1m1 0h1m1 0h1m2 0h4m1 0h3m1 0h1m1 0h2m2 0h1M0 36.5h7m1 0h2m1 0h1m4 0h3m3 0h1m1 0h3m2 0h2m1 0h1m1 0h3"/>
-        </svg>
-      </div>
-      <div class="qr-text">
-        <h2>このQRコード、実際に読み取れます</h2>
-        <p>スマートフォンのカメラを向けるだけで、入居者さまが見るのと同じガイドページが開きます。</p>
-        <a class="btn" href="https://claude.ai/code/artifact/53dd583e-1b55-411e-b71b-d3ab3531b5de">このスマホで見ている方はこちら</a>
-        <p class="url">https://claude.ai/code/artifact/53dd583e-1b55-411e-b71b-d3ab3531b5de</p>
-      </div>
+  <div class="card qr-card">
+    <h2>読み取ると、ガイドが開きます</h2>
+    <p>スマホのカメラを向けるだけです。</p>
+    <div class="plaque">
+      <svg viewBox="0 0 37 37" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="採寸ガイドを開くQRコード">
+        <path stroke="#16304F" d="M0 0.5h7m3 0h1m1 0h3m6 0h1m1 0h1m4 0h1m1 0h7M0 1.5h1m5 0h1m6 0h2m2 0h2m1 0h1m3 0h1m2 0h2m1 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h2m2 0h2m1 0h1m5 0h1m4 0h1m3 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h1m4 0h1m2 0h2m2 0h1m1 0h1m2 0h3m2 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m5 0h1m2 0h3m1 0h3m4 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h1m1 0h2m1 0h5m2 0h3m4 0h1m2 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h1m2 0h3m1 0h1m1 0h2m1 0h3m1 0h1m1 0h1m1 0h1M0 8.5h1m1 0h5m2 0h1m1 0h2m1 0h3m4 0h1m2 0h3m1 0h1m1 0h5M3 9.5h1m3 0h4m1 0h2m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m5 0h1m3 0h1M0 10.5h1m2 0h1m2 0h2m4 0h2m1 0h2m2 0h1m1 0h2m4 0h1m2 0h2m3 0h2M2 11.5h1m4 0h5m1 0h1m1 0h1m2 0h4m4 0h4m1 0h3m2 0h1M2 12.5h2m1 0h3m1 0h9m1 0h2m1 0h1m1 0h2m1 0h1m1 0h2m1 0h5M0 13.5h1m4 0h1m1 0h1m1 0h5m4 0h2m3 0h1m7 0h1m3 0h1M0 14.5h1m2 0h5m1 0h4m2 0h2m1 0h1m1 0h1m1 0h1m2 0h1m1 0h2m1 0h4m2 0h1M2 15.5h1m2 0h1m1 0h6m1 0h3m2 0h2m2 0h1m3 0h2m2 0h2m2 0h2M4 16.5h1m1 0h4m1 0h1m1 0h1m4 0h6m1 0h1m1 0h1m2 0h1m1 0h1m1 0h3M4 17.5h1m4 0h1m2 0h1m1 0h3m6 0h4m1 0h2m4 0h2M0 18.5h5m1 0h3m1 0h2m1 0h2m5 0h2m2 0h6m1 0h1m3 0h2M0 19.5h2m1 0h2m2 0h3m1 0h1m1 0h1m2 0h1m1 0h1m2 0h4m1 0h3m1 0h2m1 0h1m2 0h1M2 20.5h2m1 0h3m1 0h3m2 0h1m2 0h2m3 0h1m1 0h3m2 0h2m1 0h1m1 0h1M0 21.5h2m1 0h3m1 0h2m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m1 0h2m3 0h1m4 0h1m1 0h1M0 22.5h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h3m1 0h3m3 0h1m3 0h1m1 0h1m1 0h5m2 0h1M1 23.5h4m2 0h3m1 0h2m1 0h5m1 0h3m3 0h4m1 0h2M2 24.5h3m1 0h3m2 0h1m1 0h4m4 0h1m2 0h2m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1M0 25.5h2m1 0h2m2 0h2m1 0h1m4 0h1m2 0h1m1 0h4m2 0h1m2 0h1m1 0h1M0 26.5h1m1 0h1m1 0h1m1 0h2m4 0h5m2 0h1m2 0h1m2 0h1m1 0h1m2 0h2m1 0h1m1 0h2M0 27.5h1m1 0h1m1 0h2m4 0h2m2 0h2m3 0h3m2 0h1m1 0h1m2 0h2m2 0h1m2 0h1M0 28.5h1m1 0h3m1 0h1m1 0h2m3 0h1m1 0h1m1 0h4m1 0h1m1 0h9m1 0h3M8 29.5h2m2 0h1m3 0h1m2 0h2m2 0h1m3 0h2m3 0h2M0 30.5h7m3 0h1m1 0h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h3M0 31.5h1m5 0h1m1 0h1m1 0h1m2 0h2m4 0h1m6 0h1m1 0h1m3 0h2m1 0h2M0 32.5h1m1 0h3m1 0h1m1 0h1m2 0h5m2 0h1m1 0h3m2 0h1m1 0h6m1 0h1m1 0h1M0 33.5h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h4m3 0h1m1 0h4m2 0h2m1 0h2m2 0h1M0 34.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m5 0h1m1 0h2m3 0h2m2 0h1m5 0h2M0 35.5h1m5 0h1m2 0h1m2 0h1m1 0h1m1 0h1m1 0h1m2 0h4m1 0h3m1 0h1m1 0h2m2 0h1M0 36.5h7m1 0h2m1 0h1m4 0h3m3 0h1m1 0h3m2 0h2m1 0h1m1 0h3"/>
+      </svg>
     </div>
-  </section>
+    <a class="btn" href="https://claude.ai/code/artifact/53dd583e-1b55-411e-b71b-d3ab3531b5de">このスマホで見ている方はこちら</a>
+  </div>
 
-  <section class="flow">
-    <p class="sec-label">仕組み</p>
-    <ol class="steps">
-      <li>
-        <span class="n">1</span>
-        <span><b>置く</b><span>原状回復の仕上げに、メジャーを1つ置いていくだけ。部屋ごとの作業はありません。</span></span>
-      </li>
-      <li>
-        <span class="n">2</span>
-        <span><b>読み取る</b><span>内見や入居のときに、入居者さまがシールのQRコードを読み取ります。</span></span>
-      </li>
-      <li>
-        <span class="n">3</span>
-        <span><b>開く</b><span>全物件共通の採寸ガイドが開きます。登録も入力も不要。測ったら写真を1枚撮るだけです。</span></span>
-      </li>
-    </ol>
-  </section>
-
-  <section class="grid2">
-    <div class="cols">
-      <div class="panel">
-        <h3>決まっていること</h3>
-        <ul>
-          <li>ページに会社名・ロゴ・問い合わせ先は載せない(入居者さまの手をわずらわせないため)</li>
-          <li>入居者さまへの課金なし・登録なし</li>
-          <li>記録は「メジャーを当てたまま写真を1枚」</li>
-          <li>載せるのは5か所(洗濯機・冷蔵庫・カーテン・テレビ・大きな荷物の通り道)</li>
-          <li>寸法はすべて「約◯cm」+実測をおすすめする一文</li>
-        </ul>
-      </div>
-      <div class="panel open">
-        <h3>ご相談したいこと</h3>
-        <ul>
-          <li>シールに社名を入れるかどうか(ページを無記名にしたため)</li>
-          <li>公開するURL(ドメイン)をどうするか</li>
-          <li>メジャーの仕様と発注ロット</li>
-          <li>掲載する場所を増やす・減らす必要があるか</li>
-        </ul>
-      </div>
-    </div>
-    <p class="spec"><b>シール仕様(案)</b><br>40×40mm・角丸3mm / 紺1色+白 / 耐水PET・強粘着 / QRは22mm以上</p>
-  </section>
-
-  <footer class="note">
-    ※ このQRコードとリンクは、確認用の一時的なURLです。公開時には正式なURLに差し替えます。<br>
-    ※ ガイドページの中身(測る場所・図・文章)は、このまま公開できる状態です。
-  </footer>
+  <p class="note">※ このQRコードは確認用の一時的なURLです。公開時には正式なURLに差し替えます。</p>
 
 </div>

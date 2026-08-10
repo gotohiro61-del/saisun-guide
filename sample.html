@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="メジャーにシールを貼ったイメージと、読み取ると採寸ガイドが開くQRコード。">
+<title>メジャーにシールを貼ったイメージ</title>
+</head>
+<body>
+<style>
+  :root {
+    --navy: #16304F;
+    --ink: #101820;
+    --muted: #5A6472;
+    --ground: #EFF2F5;
+    --surface: #FFFFFF;
+    --line: #D8DEE6;
+    --sans: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic Medium", "Yu Gothic", "Noto Sans JP", "Meiryo", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --ground:#0E1620; --surface:#18222E; --ink:#E8EDF3; --muted:#9AA7B6; --line:#27384B; --navy:#1D3E63; }
+  }
+  :root[data-theme="dark"] { --ground:#0E1620; --surface:#18222E; --ink:#E8EDF3; --muted:#9AA7B6; --line:#27384B; --navy:#1D3E63; }
+  :root[data-theme="light"] { --ground:#EFF2F5; --surface:#FFFFFF; --ink:#101820; --muted:#5A6472; --line:#D8DEE6; --navy:#16304F; }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: var(--sans); font-size: 16px; line-height: 1.8;
+    -webkit-text-size-adjust: 100%;
+  }
+  .sheet { max-width: 520px; margin: 0 auto; padding: 40px 20px 64px; }
+  :focus-visible { outline: 3px solid #F2C230; outline-offset: 3px; }
+
+  h1 { margin: 0 0 8px; font-size: 21px; letter-spacing: -.01em; }
+  .sub { margin: 0 0 28px; font-size: 14px; color: var(--muted); }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 6px; padding: 24px 20px; margin-bottom: 20px;
+  }
+  .card figure { margin: 0; }
+  .card svg.measure { width: 100%; height: auto; display: block; }
+  figcaption { margin-top: 14px; font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+
+  .qr-card { text-align: center; }
+  .qr-card h2 { margin: 0 0 6px; font-size: 17px; }
+  .qr-card p { margin: 0 0 20px; font-size: 13.5px; color: var(--muted); }
+  .plaque {
+    width: 240px; max-width: 100%; aspect-ratio: 1 / 1;
+    margin: 0 auto; padding: 14px;
+    background: #FFFFFF; border: 1px solid #E2E7ED; border-radius: 6px;
+  }
+  .plaque svg { width: 100%; height: 100%; display: block; }
+  .btn {
+    display: inline-block; margin-top: 20px;
+    background: var(--navy); color: #fff; text-decoration: none;
+    font-size: 14px; font-weight: 700; padding: 13px 22px; border-radius: 6px;
+  }
+  .note { font-size: 12px; color: var(--muted); line-height: 1.8; margin: 0; }
+</style>
+
+<div class="sheet">
+
+  <h1>メジャーにシールを貼ったイメージ</h1>
+  <p class="sub">下のQRコードを、スマホのカメラで読み取ってみてください。</p>
+
+  <div class="card">
+    <figure>
+      <svg class="measure" viewBox="0 0 460 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="丸型メジャーにQRコード入りのシールを貼ったイメージ">
+        <defs>
+          <radialGradient id="face" cx="34%" cy="24%" r="84%">
+            <stop offset="0%" stop-color="#FFFFFF"/>
+            <stop offset="58%" stop-color="#F5F7F9"/>
+            <stop offset="100%" stop-color="#E2E7EC"/>
+          </radialGradient>
+          <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#E4E9EE"/>
+            <stop offset="100%" stop-color="#C7CFD8"/>
+          </linearGradient>
+          <filter id="blur" x="-30%" y="-40%" width="160%" height="200%">
+            <feGaussianBlur stdDeviation="13"/>
+          </filter>
+          <mask id="wallmask">
+            <rect width="460" height="400" fill="#000"/>
+            <ellipse cx="230" cy="214" rx="155" ry="136" fill="#fff"/>
+            <ellipse cx="230" cy="180" rx="155" ry="136" fill="#000"/>
+          </mask>
+        </defs>
+
+        <!-- 影 -->
+        <ellipse cx="234" cy="356" rx="146" ry="16" fill="#26313E" opacity=".22" filter="url(#blur)"/>
+
+        <!-- 引き出しフック(黒) -->
+        <g transform="rotate(-9 84 156)">
+          <rect x="14" y="136" width="70" height="36" rx="6" fill="#292C32"/>
+          <g stroke="#565C65" stroke-width="2.4" stroke-linecap="round">
+            <line x1="24" y1="145" x2="74" y2="145"/>
+            <line x1="24" y1="153" x2="74" y2="153"/>
+            <line x1="24" y1="161" x2="74" y2="161"/>
+          </g>
+          <rect x="6" y="131" width="11" height="46" rx="3" fill="#17191D"/>
+        </g>
+
+        <!-- 側面(ギザギザのグリップ) -->
+        <ellipse cx="230" cy="214" rx="155" ry="136" fill="url(#wall)"/>
+        <g mask="url(#wallmask)" stroke="#A9B3BE" stroke-width="2.2">
+          <line x1="80" y1="200" x2="80" y2="360"/><line x1="96" y1="200" x2="96" y2="360"/>
+          <line x1="112" y1="200" x2="112" y2="360"/><line x1="128" y1="200" x2="128" y2="360"/>
+          <line x1="144" y1="200" x2="144" y2="360"/><line x1="160" y1="200" x2="160" y2="360"/>
+          <line x1="176" y1="200" x2="176" y2="360"/><line x1="192" y1="200" x2="192" y2="360"/>
+          <line x1="208" y1="200" x2="208" y2="360"/><line x1="224" y1="200" x2="224" y2="360"/>
+          <line x1="240" y1="200" x2="240" y2="360"/><line x1="256" y1="200" x2="256" y2="360"/>
+          <line x1="272" y1="200" x2="272" y2="360"/><line x1="288" y1="200" x2="288" y2="360"/>
+          <line x1="304" y1="200" x2="304" y2="360"/><line x1="320" y1="200" x2="320" y2="360"/>
+          <line x1="336" y1="200" x2="336" y2="360"/><line x1="352" y1="200" x2="352" y2="360"/>
+          <line x1="368" y1="200" x2="368" y2="360"/>
+        </g>
+
+        <!-- 上面 -->
+        <ellipse cx="230" cy="180" rx="155" ry="136" fill="url(#face)"/>
+        <ellipse cx="230" cy="180" rx="155" ry="136" fill="none" stroke="#C9D1DA" stroke-width="1.6"/>
+        <ellipse cx="230" cy="180" rx="140" ry="122" fill="none" stroke="#E6EAEF" stroke-width="1.4"/>
+
+        <!-- シール(40×40mm・角丸3mm・紺1色+白) -->
+        <g transform="translate(230 180) scale(1 0.878) translate(-230 -180)">
+          <rect x="155" y="104" width="150" height="150" rx="9" fill="#16304F"/>
+          <rect x="189" y="118" width="82" height="82" rx="2" fill="#FFFFFF"/>
+          <g transform="translate(193 122) scale(2)" shape-rendering="crispEdges">
+            <path stroke="#16304F" d="M0 0.5h7m3 0h1m1 0h3m6 0h1m1 0h1m4 0h1m1 0h7M0 1.5h1m5 0h1m6 0h2m2 0h2m1 0h1m3 0h1m2 0h2m1 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h2m2 0h2m1 0h1m5 0h1m4 0h1m3 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h1m4 0h1m2 0h2m2 0h1m1 0h1m2 0h3m2 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m5 0h1m2 0h3m1 0h3m4 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h1m1 0h2m1 0h5m2 0h3m4 0h1m2 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h1m2 0h3m1 0h1m1 0h2m1 0h3m1 0h1m1 0h1m1 0h1M0 8.5h1m1 0h5m2 0h1m1 0h2m1 0h3m4 0h1m2 0h3m1 0h1m1 0h5M3 9.5h1m3 0h4m1 0h2m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m5 0h1m3 0h1M0 10.5h1m2 0h1m2 0h2m4 0h2m1 0h2m2 0h1m1 0h2m4 0h1m2 0h2m3 0h2M2 11.5h1m4 0h5m1 0h1m1 0h1m2 0h4m4 0h4m1 0h3m2 0h1M2 12.5h2m1 0h3m1 0h9m1 0h2m1 0h1m1 0h2m1 0h1m1 0h2m1 0h5M0 13.5h1m4 0h1m1 0h1m1 0h5m4 0h2m3 0h1m7 0h1m3 0h1M0 14.5h1m2 0h5m1 0h4m2 0h2m1 0h1m1 0h1m1 0h1m2 0h1m1 0h2m1 0h4m2 0h1M2 15.5h1m2 0h1m1 0h6m1 0h3m2 0h2m2 0h1m3 0h2m2 0h2m2 0h2M4 16.5h1m1 0h4m1 0h1m1 0h1m4 0h6m1 0h1m1 0h1m2 0h1m1 0h1m1 0h3M4 17.5h1m4 0h1m2 0h1m1 0h3m6 0h4m1 0h2m4 0h2M0 18.5h5m1 0h3m1 0h2m1 0h2m5 0h2m2 0h6m1 0h1m3 0h2M0 19.5h2m1 0h2m2 0h3m1 0h1m1 0h1m2 0h1m1 0h1m2 0h4m1 0h3m1 0h2m1 0h1m2 0h1M2 20.5h2m1 0h3m1 0h3m2 0h1m2 0h2m3 0h1m1 0h3m2 0h2m1 0h1m1 0h1M0 21.5h2m1 0h3m1 0h2m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m1 0h2m3 0h1m4 0h1m1 0h1M0 22.5h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h3m1 0h3m3 0h1m3 0h1m1 0h1m1 0h5m2 0h1M1 23.5h4m2 0h3m1 0h2m1 0h5m1 0h3m3 0h4m1 0h2M2 24.5h3m1 0h3m2 0h1m1 0h4m4 0h1m2 0h2m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1M0 25.5h2m1 0h2m2 0h2m1 0h1m4 0h1m2 0h1m1 0h4m2 0h1m2 0h1m1 0h1M0 26.5h1m1 0h1m1 0h1m1 0h2m4 0h5m2 0h1m2 0h1m2 0h1m1 0h1m2 0h2m1 0h1m1 0h2M0 27.5h1m1 0h1m1 0h2m4 0h2m2 0h2m3 0h3m2 0h1m1 0h1m2 0h2m2 0h1m2 0h1M0 28.5h1m1 0h3m1 0h1m1 0h2m3 0h1m1 0h1m1 0h4m1 0h1m1 0h9m1 0h3M8 29.5h2m2 0h1m3 0h1m2 0h2m2 0h1m3 0h2m3 0h2M0 30.5h7m3 0h1m1 0h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h3M0 31.5h1m5 0h1m1 0h1m1 0h1m2 0h2m4 0h1m6 0h1m1 0h1m3 0h2m1 0h2M0 32.5h1m1 0h3m1 0h1m1 0h1m2 0h5m2 0h1m1 0h3m2 0h1m1 0h6m1 0h1m1 0h1M0 33.5h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h4m3 0h1m1 0h4m2 0h2m1 0h2m2 0h1M0 34.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m5 0h1m1 0h2m3 0h2m2 0h1m5 0h2M0 35.5h1m5 0h1m2 0h1m2 0h1m1 0h1m1 0h1m1 0h1m2 0h4m1 0h3m1 0h1m1 0h2m2 0h1M0 36.5h7m1 0h2m1 0h1m4 0h3m3 0h1m1 0h3m2 0h2m1 0h1m1 0h3"/>
+          </g>
+          <text x="230" y="222" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-size="12.5" font-weight="bold">ご自由にお使いください</text>
+          <text x="230" y="240" text-anchor="middle" fill="#A3B7CE" font-family="sans-serif" font-size="10">引っ越しの採寸ガイド</text>
+        </g>
+      </svg>
+      <figcaption>お送りいただいた写真をもとにした作図です。実際のメジャーは別のものになります。シールは紺1色+白・40×40mm。</figcaption>
+    </figure>
+  </div>
+
+  <div class="card qr-card">
+    <h2>読み取ると、ガイドが開きます</h2>
+    <p>スマホのカメラを向けるだけです。</p>
+    <div class="plaque">
+      <svg viewBox="0 0 37 37" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="採寸ガイドを開くQRコード">
+        <path stroke="#16304F" d="M0 0.5h7m3 0h1m1 0h3m6 0h1m1 0h1m4 0h1m1 0h7M0 1.5h1m5 0h1m6 0h2m2 0h2m1 0h1m3 0h1m2 0h2m1 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h2m2 0h2m1 0h1m5 0h1m4 0h1m3 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h1m4 0h1m2 0h2m2 0h1m1 0h1m2 0h3m2 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m5 0h1m2 0h3m1 0h3m4 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h1m1 0h2m1 0h5m2 0h3m4 0h1m2 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h1m2 0h3m1 0h1m1 0h2m1 0h3m1 0h1m1 0h1m1 0h1M0 8.5h1m1 0h5m2 0h1m1 0h2m1 0h3m4 0h1m2 0h3m1 0h1m1 0h5M3 9.5h1m3 0h4m1 0h2m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m5 0h1m3 0h1M0 10.5h1m2 0h1m2 0h2m4 0h2m1 0h2m2 0h1m1 0h2m4 0h1m2 0h2m3 0h2M2 11.5h1m4 0h5m1 0h1m1 0h1m2 0h4m4 0h4m1 0h3m2 0h1M2 12.5h2m1 0h3m1 0h9m1 0h2m1 0h1m1 0h2m1 0h1m1 0h2m1 0h5M0 13.5h1m4 0h1m1 0h1m1 0h5m4 0h2m3 0h1m7 0h1m3 0h1M0 14.5h1m2 0h5m1 0h4m2 0h2m1 0h1m1 0h1m1 0h1m2 0h1m1 0h2m1 0h4m2 0h1M2 15.5h1m2 0h1m1 0h6m1 0h3m2 0h2m2 0h1m3 0h2m2 0h2m2 0h2M4 16.5h1m1 0h4m1 0h1m1 0h1m4 0h6m1 0h1m1 0h1m2 0h1m1 0h1m1 0h3M4 17.5h1m4 0h1m2 0h1m1 0h3m6 0h4m1 0h2m4 0h2M0 18.5h5m1 0h3m1 0h2m1 0h2m5 0h2m2 0h6m1 0h1m3 0h2M0 19.5h2m1 0h2m2 0h3m1 0h1m1 0h1m2 0h1m1 0h1m2 0h4m1 0h3m1 0h2m1 0h1m2 0h1M2 20.5h2m1 0h3m1 0h3m2 0h1m2 0h2m3 0h1m1 0h3m2 0h2m1 0h1m1 0h1M0 21.5h2m1 0h3m1 0h2m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m1 0h2m3 0h1m4 0h1m1 0h1M0 22.5h1m1 0h1m1 0h1m1 0h1m2 0h1m1 0h3m1 0h3m3 0h1m3 0h1m1 0h1m1 0h5m2 0h1M1 23.5h4m2 0h3m1 0h2m1 0h5m1 0h3m3 0h4m1 0h2M2 24.5h3m1 0h3m2 0h1m1 0h4m4 0h1m2 0h2m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1M0 25.5h2m1 0h2m2 0h2m1 0h1m4 0h1m2 0h1m1 0h4m2 0h1m2 0h1m1 0h1M0 26.5h1m1 0h1m1 0h1m1 0h2m4 0h5m2 0h1m2 0h1m2 0h1m1 0h1m2 0h2m1 0h1m1 0h2M0 27.5h1m1 0h1m1 0h2m4 0h2m2 0h2m3 0h3m2 0h1m1 0h1m2 0h2m2 0h1m2 0h1M0 28.5h1m1 0h3m1 0h1m1 0h2m3 0h1m1 0h1m1 0h4m1 0h1m1 0h9m1 0h3M8 29.5h2m2 0h1m3 0h1m2 0h2m2 0h1m3 0h2m3 0h2M0 30.5h7m3 0h1m1 0h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h3M0 31.5h1m5 0h1m1 0h1m1 0h1m2 0h2m4 0h1m6 0h1m1 0h1m3 0h2m1 0h2M0 32.5h1m1 0h3m1 0h1m1 0h1m2 0h5m2 0h1m1 0h3m2 0h1m1 0h6m1 0h1m1 0h1M0 33.5h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h4m3 0h1m1 0h4m2 0h2m1 0h2m2 0h1M0 34.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m5 0h1m1 0h2m3 0h2m2 0h1m5 0h2M0 35.5h1m5 0h1m2 0h1m2 0h1m1 0h1m1 0h1m1 0h1m2 0h4m1 0h3m1 0h1m1 0h2m2 0h1M0 36.5h7m1 0h2m1 0h1m4 0h3m3 0h1m1 0h3m2 0h2m1 0h1m1 0h3"/>
+      </svg>
+    </div>
+    <a class="btn" href="https://claude.ai/code/artifact/53dd583e-1b55-411e-b71b-d3ab3531b5de">このスマホで見ている方はこちら</a>
+  </div>
+
+  <p class="note">※ このQRコードは確認用の一時的なURLです。公開時には正式なURLに差し替えます。</p>
+
+</div>
+</body>
+</html>
